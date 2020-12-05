@@ -1,0 +1,45 @@
+[
+  {
+    "_id": "5e8ead3202581a15d46b5ea2",
+    "officeLocation": ["Dehradun"],
+    "mapAnnotation": [],
+    "address": "7/6, General Wing, Prem Nagar, Dehradun, Uttarakhand 248007",
+    "email": "amica.platform@gmail.com",
+    "description": "its Fine",
+    "facebookUrl": "https://www.facebook.com/AyushTyagi007",
+    "linkedInUrl": "",
+    "twitterUrl": "",
+    "instagramUrl": "",
+    "phoneNumber": 9125161262,
+    "aboutUs": "Amica App is an teaching platform.",
+    "storeName": "AMICA",
+    "dasboardLogo": {
+      "imageUrl": "https://ik.imagekit.io/7f9szw1uuhq/amica_logo-1_ZFncQrRv_.png",
+      "imageId": "5ebd50bdb8db3d4092c02388",
+      "filePath": "/amica_logo-1_ZFncQrRv_.png"
+    },
+    "userApp": {
+      "imageUrl": "https://ik.imagekit.io/7f9szw1uuhq/amica_logo-1_ZFncQrRv_.png",
+      "imageId": "5ebd50a1edb409321d5b1916",
+      "filePath": "/amica_logo-1_ZFncQrRv_.png"
+    },
+    "webApp": {
+      "imageUrl": "https://ik.imagekit.io/7f9szw1uuhq/amica_logo-1_ZFncQrRv_.png",
+      "imageId": "5ebd50a9edb409321d5b191a",
+      "filePath": "/amica_logo-1_ZFncQrRv_.png"
+    },
+    "deliveryAppLogo": {
+      "imageUrl": "https://ik.imagekit.io/7f9szw1uuhq/amica_logo-1_ZFncQrRv_.png",
+      "imageId": "5ebd50b48577d050631dc565",
+      "filePath": "/amica_logo-1_ZFncQrRv_.png"
+    },
+    "createdAt": "2020-04-09T05:05:54.359Z",
+    "updatedAt": "2020-05-15T11:27:16.037Z",
+    "__v": 0,
+    "iconLogo": {
+      "imageId": "5ebd50c5868e471ddea38de1",
+      "imageUrl": "https://ik.imagekit.io/7f9szw1uuhq/amica_logo-1_ZFncQrRv_.png",
+      "filePath": "/amica_logo-1_ZFncQrRv_.png"
+    }
+  }
+]
