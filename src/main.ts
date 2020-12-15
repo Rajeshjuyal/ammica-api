@@ -3,29 +3,15 @@ import {AppModule} from './app.module';
 import {ValidationPipe} from '@nestjs/common';
 import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
 import {UsersModule} from './users/users.module';
-import {CategoriesModule} from './categories/categories.module';
 import {UploadModule} from './upload/upload.module';
-import {DealsModule} from './deals/deals.module';
-import {ProductsModule} from './products/products.module';
 import * as dotenv from 'dotenv';
-import {AddressModule} from './address/address.module';
-import {FavouritesModule} from './favourites/favourites.module';
 import {globalConfig} from './utils/app-service-data';
-import {OrderModule} from './order/order.module';
-import {CouponsModule} from './coupons/coupons.module';
-import {CardInformationModule} from './card-information/card-information.module';
-import {LocationsModule} from './locations/locations.module';
-import {CartModule} from './cart/cart.module';
-import {RatingModule} from './rating/rating.module';
 import {NotificationsModule} from './notifications/notifications.module';
 import * as sentry from '@sentry/node';
-import {ProductstockModule} from './productstock/productstock.module';
 import {SettingModule} from './setting/setting.module';
 import {from} from 'rxjs';
-import {BannerModule} from './Banner/banner.module';
-import {DeliveryTaxModule} from './delivery-tax-info/delivery-tax.module';
 import { BusinessModule } from './business/business.module';
-import { SubcategoryModule } from './subcategory/subcategory.module';
+import { StaffModule } from './staff/staff.module';
 import { SeedService} from './seed/seed.service';
 const Cron = require('cron').CronJob;
 
@@ -66,8 +52,7 @@ async function bootstrap() {
         }
     }
     const document = SwaggerModule.createDocument(app, options, {
-        include: [UsersModule, CategoriesModule, UploadModule, DealsModule, ProductsModule, AddressModule, FavouritesModule, OrderModule, CouponsModule, CardInformationModule, LocationsModule, CartModule, RatingModule,SettingModule, NotificationsModule, ProductstockModule, BannerModule,DeliveryTaxModule,BusinessModule,
-            SubcategoryModule]
+        include: [UsersModule, UploadModule, SettingModule, NotificationsModule,BusinessModule, StaffModule]
     });
     SwaggerModule.setup('/explorer', app, document);
     const configService = app.get(SeedService);

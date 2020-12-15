@@ -31,6 +31,9 @@ import { BusinessModule } from './business/business.module';
 import { SubcategoryModule } from './subcategory/subcategory.module';
 import { SeedModule } from './seed/seed.module';
 import { SequenceModule } from './sequence/sequence.module';
+import { ClassesModule } from './classes/classes.module';
+import { StaffModule } from './staff/staff.module';
+import { ClassesModule } from './classes/classes.module';
 
 
 @Global()
@@ -69,6 +72,8 @@ import { SequenceModule } from './sequence/sequence.module';
         MongooseModule.forFeature([{name: 'Orders', schema: OrderSchema},{name: 'Notifications', schema: NotificationsSchema}, {name: 'Chat', schema: ChatSchema}]),
         SeedModule,
         SequenceModule,
+        ClassesModule,
+        StaffModule,
         
     ],
     controllers: [AppController],
