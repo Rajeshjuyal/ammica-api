@@ -282,12 +282,6 @@ export class StaffUpdateDTO {
   verificationId: string;
 
   @IsOptional()
-  @ValidateNested()
-  @Type(() => CoOridnatesDTO)
-  @ApiModelProperty()
-  location: CoOridnatesDTO;
-
-  @IsOptional()
   @IsNumber()
   @IsPositive()
   @ApiModelProperty()

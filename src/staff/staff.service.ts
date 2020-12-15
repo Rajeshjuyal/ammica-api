@@ -110,7 +110,7 @@ export class StaffService {
       return {response_code: HttpStatus.UNAUTHORIZED, response_data: 'Sorry !!, you are not allowed to access this api',};
   }
   try {
-      const orders = await this.orderModel.find({assignedTo: id});
+    //   const orders = await this.orderModel.find({assignedTo: id});
       // if (orders.length > 0) {
       //     return {
       //         response_code: HttpStatus.BAD_REQUEST,
