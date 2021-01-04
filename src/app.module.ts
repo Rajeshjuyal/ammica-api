@@ -91,7 +91,6 @@ import { ParentModule } from './parent/parent.module';
         SeedModule,
         SequenceModule,
         AttendenceModule,
-    ProductModule,
     TeacherModule,
     SubjectModule,
 
