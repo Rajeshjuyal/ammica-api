@@ -29,7 +29,6 @@ import { BusinessModule } from './business/business.module';
 import { SubcategoryModule } from './subcategory/subcategory.module';
 import { SeedModule } from './seed/seed.module';
 import { SequenceModule } from './sequence/sequence.module';
-import { ProductModule } from './Product/Product.module';
 import { TeacherModule } from './teacher/teacher.module';
 import { SubjectModule } from './subject/subject.module';
 
