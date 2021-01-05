@@ -27,7 +27,6 @@ import {ApiBearerAuth} from '@nestjs/swagger';
 import {AuthGuard} from '@nestjs/passport';
 import {CommonResponseModel} from '../utils/app-service-data';
 import {GetUser} from '../utils/user.decorator';
-import {LocationDTO} from '../address/address.model';
 import {identity} from 'rxjs';
 
 @Controller('users')
@@ -37,12 +36,6 @@ export class UsersController {
     }
 
     // sends request to get all delivery boys list
-    @Get('/delivery/boys/list')
-    @UseGuards(AuthGuard('jwt'))
-    @ApiBearerAuth()
-    public getAllDeliveryBodyList(@GetUser() user: UsersDTO): Promise<CommonResponseModel> {
-        return this.userService.getAllDeliveryBoys(user);
-    }
 
     // sends request to get user's information
     @Get('/me')
@@ -52,13 +45,7 @@ export class UsersController {
         return this.userService.getUserInformation(user._id);
     }
 
-    // sends request to get delivery boys list
-    @Get('/delivery/boys/:page/:limit')
-    @UseGuards(AuthGuard('jwt'))
-    @ApiBearerAuth()
-    public getDeliveryBoysList(@GetUser() user, @Param('page') pageNumber: number, @Param('limit') pageLimit: number): Promise<CommonResponseModel> {
-        return this.userService.getDeliveryBoyList(user, Number(pageLimit), Number(pageNumber));
-    }
+  
 
     // sends request to get list of users
     @Get('/list/:page/:limit')
@@ -68,13 +55,7 @@ export class UsersController {
         return this.userService.getListOfUsers(Number(page), Number(limit));
     }
 
-    // sends request to get admin's settings
-    @Get('/delivery/information')
-    @UseGuards(AuthGuard('jwt'))
-    @ApiBearerAuth()
-    public getAdminSettings(): Promise<CommonResponseModel> {
-        return this.userService.getAdminSettings();
-    }
+   
 
     // sends request to verify user email
     @Get('/verify/email/:verificationId')
@@ -165,14 +146,6 @@ export class UsersController {
         return this.userService.updateUserInfo(user._id, userInfo);
     }
 
-    // send's request to get user's distance from shop
-    @Post('/get/shop/distance')
-    @UseGuards(AuthGuard('jwt'))
-    @ApiBearerAuth()
-    public getUserDistanceFromShop(@GetUser() user: UsersDTO, @Body() location: LocationDTO): Promise<CommonResponseModel> {
-        return this.userService.getUserDistanceFromShop(user, location);
-    }
-
     //get All usera list
     @UseGuards(AuthGuard('jwt'))
     @ApiBearerAuth()
@@ -205,11 +178,7 @@ export class UsersController {
         return this.userService.getUserCount();
     }
 
-    //user Registration Record Data
-    @Get('all/record/data/registration')
-    public userRecordgraphdata(): Promise<CommonResponseModel> {
-        return this.userService.userRegistrationRecord();
-    }
+    
 
 //singUp with mobile number
     @Post('registration/mobile')
@@ -231,36 +200,6 @@ export class UsersController {
         return this.userService.pushNotificatioalToAllusers(data);
     }
 
-    // Admin create Role Like Delivery Boy
-    @UseGuards(AuthGuard('jwt'))
-    @ApiBearerAuth()
-    @Post('/create/delivery-boy')
-    public createNewRoleByAdmin(@Body() userData: UsersDTO): Promise<CommonResponseModel> {
-        return this.userService.adminCreateNewRole(userData);
-    }
-
-    // deletes the delivery boy
-    @Delete('/delete/delivery/body/:id')
-    @UseGuards(AuthGuard('jwt'))
-    @ApiBearerAuth()
-    public deleteDeliveryBoy(@GetUser() user: UsersDTO, @Param('id') id: string): Promise<CommonResponseModel> {
-        return this.userService.deleteDeliveryBody(user, id);
-    }
-
-    // update status like enble and disable
-    @UseGuards(AuthGuard('jwt'))
-    @ApiBearerAuth()
-    @Put('/deliveryboy/status/update/:id')
-    public updatEableandDisable(@Param('id')id:string,@Body() data:DeliverBoyStatusDTO):Promise<CommonResponseModel>{
-        return this.userService.updateDeliveryBoyStatus(id,data)
-    }
-    //get by id DeliveryBoy
-    @UseGuards(AuthGuard('jwt'))
-    @ApiBearerAuth()
-    @Get('/get/deliveryBoy/:id')
-    public findByIddeliveryBoy(@Param('id')id:string):Promise<CommonResponseModel>{
-        return this.userService.getByIdDeliveryBoy(id);
-    }
     // update delivery boy infomation by admin
     @UseGuards(AuthGuard('jwt'))
     @ApiBearerAuth()

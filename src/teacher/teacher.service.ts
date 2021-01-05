@@ -1,13 +1,18 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, HttpStatus } from '@nestjs/common';
 import { Teacher } from './teacher.model';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import {JwtService} from '@nestjs/jwt';
+import {AuthService} from '../utils/auth.service';
+import { CredentialsDTO } from './teacher.model';
 
 @Injectable()
 export class TeacherService {
   teachers: Teacher[] = [];
   constructor(
     @InjectModel('Teacher') private readonly teacherModel: Model<any>,
+    private jwtService: JwtService,
+    private authService: AuthService,
   ) {}
   public async create(teacher: Teacher) {
     var teacher1 = await this.teacherModel.create(teacher);
@@ -34,5 +39,36 @@ export class TeacherService {
     var teacher = await this.teacherModel.findByIdAndDelete(id);
     teacher.remove();
     return teacher;
+  }
+  public async validateUserCredentials(credentials: CredentialsDTO) {
+    credentials.email = credentials.email.toLowerCase();
+    const teacher = await this.teacherModel.findOne({
+      email: credentials.email,
+    });
+    if (!teacher) {
+      return {
+        response_code: HttpStatus.UNAUTHORIZED,
+        response_data: `Teacher with email ${credentials.email} is not registered`,
+      };
+    } else {
+      const passwordMatch = await this.authService.verifyPassword(
+        credentials.password,
+        teacher.password,
+      );
+      const body = {
+        token: null,
+        _id: null,
+      };
+      if (passwordMatch) {
+        body._id = teacher._id;
+        body.token = await this.authService.generateAccessToken(teacher._id);
+        return { response_code: HttpStatus.OK, response_data: body };
+      } else {
+        return {
+          response_code: HttpStatus.UNAUTHORIZED,
+          response_data: 'enter a valid password',
+        };
+      }
+    }
   }
 }

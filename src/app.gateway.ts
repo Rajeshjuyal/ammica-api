@@ -11,14 +11,13 @@ import {Server, Socket} from 'socket.io';
 import {Injectable, Logger, Scope} from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
 import {Model} from 'mongoose';
-import {OrdersDTO} from './order/order.model';
 import {ChatDataModel, MessageModel} from './chat/chat.model';
 import {ChatService} from './chat/chat.service';
 
 @Injectable()
 @WebSocketGateway()
 export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
-    constructor(@InjectModel('Notifications') private readonly notificationModel: Model<any>,@InjectModel('Orders') private readonly orderModel: Model<any>, private chatService: ChatService) {
+    constructor(@InjectModel('Notifications') private readonly notificationModel: Model<any>, private chatService: ChatService) {
     }
 
     @WebSocketServer() server: Server;
@@ -53,7 +52,7 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
             if(data && data.id){
                 let p=await this.notificationModel.findByIdAndUpdate(data.id, {status: false},{new :true});
             }else{
-                const list = await this.notificationModel.find({status:true},'ORDERID order').limit(5).sort('-createdAt');
+                const list = await this.notificationModel.find({status:true}).limit(5).sort('-createdAt');
                 this.server.emit('newOrderPlaced',list);
             }
         } catch (e) {
@@ -64,15 +63,6 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     @SubscribeMessage('get-assigned-orders')
     public async getOrderAssignedToDeliveryboy(@MessageBody() data) {
         console.log(data.id);
-        try {
-            const list = await this.orderModel.find({
-                assignedTo: data.id,
-                $or: [{orderStatus: 'Confirmed'}, {orderStatus: 'Out for delivery'}]
-            }).populate('cart').populate('product').populate('deliveryAddress').populate('user');
-            this.emitAssignedOrders(data.id, list);
-        } catch (e) {
-            this.emitAssignedOrders(data.id, []);
-        }
     }
 
     // emits order's assigne to delivery boy or any new orders assigned to him
@@ -89,18 +79,7 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
                 statusInfo.orderInfo.assignedTo = null;
             }
             console.log('ORDER STATUS CHANGED', statusInfo);
-            const res = await this.orderModel.findByIdAndUpdate(statusInfo.orderInfo._id, statusInfo.orderInfo);
-            const list = await this.orderModel.find({
-                assignedTo: statusInfo.id,
-                $or: [{orderStatus: 'Confirmed'}, {orderStatus: 'Out for delivery'}]
-            }).populate('cart').populate('product').populate('deliveryAddress').populate('user');
-            this.emitAssignedOrders(statusInfo.id, list);
             let message = '';
-            if (statusInfo.orderInfo.isAcceptedByDeliveryBoy) {
-                message = 'Delivery boy has accepted the order';
-            } else {
-                message = 'Delivery boy has rejected the order';
-            }
             this.server.emit('order-status-changed', {message});
         } catch (e) {
             console.log('COULD NOT UPDATE ORDER STATUS');
@@ -110,29 +89,6 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     @SubscribeMessage('order-update-status')
     public async changeOrderStatus(@MessageBody() statusInfo) {
         try {
-            const orderInfo: OrdersDTO = await this.orderModel.findById(statusInfo.orderId);
-            if (orderInfo) {
-                orderInfo.orderStatus = statusInfo.status;
-            }
-            // console.log(statusInfo);
-            // console.log(JSON.stringify(orderInfo));
-            const res = await this.orderModel.findByIdAndUpdate(statusInfo.orderId, orderInfo);
-            const list = await this.orderModel.find({
-                assignedTo: statusInfo.id,
-                $or: [{orderStatus: 'Confirmed'}, {orderStatus: 'Out for delivery'}]
-            }).populate('cart').populate('product').populate('deliveryAddress').populate('user');
-            const deliveredOrders = await this.orderModel.find({
-                assignedTo: statusInfo.id,
-                orderStatus: 'DELIVERED'
-            }).populate('cart').populate('product').populate('deliveryAddress').populate('user');
-            const message = `Order status is changed to ${orderInfo.orderStatus}`;
-            this.server.emit('order-status-changed', {message});
-            this.server.emit(`updated-order-status${statusInfo.id}`, {orderInfo});
-            // if (statusInfo.status === 'Out for delivery') {
-            this.emitAssignedOrders(statusInfo.id, list);
-            this.emitDeliveredOrders(statusInfo.id, deliveredOrders);
-            // } else {
-            // }
         } catch (e) {
             console.log('COULD NOT UPDATE ORDER STATUS');
             console.log(e);
@@ -141,11 +97,6 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
 
     @SubscribeMessage('get-delivered-orders')
     public async getDeliveredOrders(@MessageBody() data) {
-        const list = await this.orderModel.find({
-            assignedTo: data.id,
-            orderStatus: 'DELIVERED'
-        }).populate('cart').populate('product').populate('deliveryAddress').populate('user');
-        this.emitDeliveredOrders(data.id, list);
     }
 
     // emit delivered orders
@@ -193,7 +144,7 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
         console.log(body);
         const res = await this.chatService.closeChat(body.chatId);
         this.emitChatList(body.store,res.response_data)
-        // this.server.emit(`chat-closed${body.store}`, {chatId: body.chatId});
+
     }
 
 }

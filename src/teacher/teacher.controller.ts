@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { TeacherService } from './teacher.service';
-import { Teacher } from './teacher.model';
+import { Teacher, CredentialsDTO } from './teacher.model';
 
 @Controller('teacher')
 export class TeacherController {
@@ -37,5 +37,9 @@ export class TeacherController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.teacherService.remove(id);
+  }
+  @Post('/login')
+  public validateUser(@Body() credentials: CredentialsDTO) {
+    return this.teacherService.validateUserCredentials(credentials);
   }
 }

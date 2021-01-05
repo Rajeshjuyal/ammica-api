@@ -20,7 +20,6 @@ import {JwtService} from '@nestjs/jwt';
 import {AuthService} from '../utils/auth.service';
 import * as uuid from 'uuid/v1';
 import {UploadService} from '../upload/upload.service';
-import {LocationDTO} from '../address/address.model';
 import * as geolib from 'geolib';
 const GeneralService = require('../utils/general-service');
 @Injectable()
@@ -30,9 +29,6 @@ export class UsersService {
         private jwtService: JwtService,
         private authService: AuthService,
         private utilService: UploadService,
-        @InjectModel('Products') private readonly productsModel: Model<any>,
-        @InjectModel('Categories') private readonly categoryModel: Model<any>,
-        @InjectModel('Orders') private readonly orderModel: Model<any>,
     ) {
     }
 
@@ -40,14 +36,11 @@ export class UsersService {
     public async getUserInformation(id: string): Promise<CommonResponseModel> {
         // console.log("id",id);
         const userInfo = await this.userModel.findById(id, '-password -salt');
-        const categoryCount: number = await this.categoryModel.countDocuments();
-        const productCount: number = await this.productsModel.countDocuments();
         const userCount: number = await this.userModel.countDocuments();
-        const orderCount = await this.orderModel.countDocuments();
         if (userInfo) {
             return {
                 response_code: HttpStatus.OK,
-                response_data: {userInfo, categoryCount, productCount, userCount, orderCount}
+                response_data: {userInfo, userCount,}
             };
         } else {
             return {
@@ -59,7 +52,7 @@ export class UsersService {
 
     // get's admin settings
     public async getAdminSettings(): Promise<CommonResponseModel> {
-        const settings = await this.userModel.findOne({role: 'Admin'}, 'deliveryCharge deliveryDistanceUnit freeDeliveryDistance location');
+        const settings = await this.userModel.findOne({role: 'Admin'});
         if (settings) {
             return {response_code: HttpStatus.OK, response_data: settings};
         } else {
@@ -125,15 +118,7 @@ export class UsersService {
         }
     }
 
-    // returns list of delivery boys
-    public async getDeliveryBoyList(user: UsersDTO, limit: number, page: number): Promise<CommonResponseModel> {
-        if (user.role !== 'Admin') {
-            return {response_code: HttpStatus.UNAUTHORIZED, response_data: 'Sorry !!, you are not allowed to access this api',};
-        }
-        const list = await this.userModel.find({role: 'Delivery Boy'}).limit(limit).skip((page * limit) - limit);
-        const totalCount = await this.userModel.count({role: 'Delivery Boy'});
-        return {response_code: HttpStatus.OK, response_data: {list, totalCount}};
-    }
+    
 
     //Admin create the another Role Like DeliveryBoys || Mangers in future
     public async adminCreateNewRole(userData: UsersDTO): Promise<CommonResponseModel> {
@@ -425,42 +410,7 @@ export class UsersService {
     }
 
     // returns user'sdistance from shop
-    public async getUserDistanceFromShop(user: UsersDTO, locationCordinates: LocationDTO): Promise<CommonResponseModel> {
-        if (user.role !== 'User') {
-            return {
-                response_code: HttpStatus.UNAUTHORIZED,
-                response_data: 'Sorry !!, you are not allowed to access this api',
-            };
-        } else {
-            const adminSettings = (await this.userModel.findOne({role: 'Admin'})) as UsersDTO;
-            if (adminSettings) {
-                const distance = geolib.getDistance(
-                    {
-                        latitude: locationCordinates.shopCoOrdinates[1],
-                        longitude: locationCordinates.shopCoOrdinates[0],
-                    },
-                    {
-                        latitude: locationCordinates.userCoOrdinates[1],
-                        longitude: locationCordinates.userCoOrdinates[0],
-                    },
-                );
-                const convertedDistance = geolib.convertDistance(distance, locationCordinates.unit);
-
-                let deliveryCharges =
-                    convertedDistance < adminSettings.freeDeliveryDistance ? 0 : adminSettings.deliveryCharge * (convertedDistance - adminSettings.freeDeliveryDistance);
-                deliveryCharges = Number(deliveryCharges.toFixed(2));
-                return {
-                    response_code: HttpStatus.OK,
-                    response_data: {distance: convertedDistance, deliveryCharges},
-                };
-            } else {
-                return {
-                    response_code: HttpStatus.BAD_REQUEST,
-                    response_data: 'Could not get admin settings',
-                };
-            }
-        }
-    }
+    
 
     // checks whether the token is valid or not
     public async verifyToken(token: string): Promise<any> {
@@ -547,62 +497,7 @@ export class UsersService {
         };
     }
 
-    // user registration report user data
-    public async userRegistrationRecord(): Promise<CommonResponseModel> {
-        const startDate = new Date(new Date().setHours(0, 0, 0, 0));
-        const endDate = new Date(
-            new Date().setHours(23, 59, 59, 999) -
-            startDate.getDay() * 7 * 1000 * 60 * 60 * 24,
-        );
-        console.log('startDate', startDate);
-        console.log('endDate', endDate);
-
-        const ressult = await this.orderModel.aggregate([
-            {$match: {createdAt: {$gte: startDate, $lte: endDate}}},
-            {
-                $group: {
-                    _id: {
-                        year: {$year: '$createdAt'},
-                        month: {$month: '$createdAt'},
-                        day: {$dayOfMonth: '$createdAt'},
-                        hour: {$hour: '$createdAt'},
-                        minutes: {$minute: '$createdAt'},
-                        seconds: {$second: '$createdAt'},
-                        milliseconds: {$millisecond: '$createdAt'},
-                        dayOfYear: {$dayOfYear: '$createdAt'},
-                        dayOfWeek: {$dayOfWeek: '$createdAt'},
-                        week: {$week: '$createdAt'},
-                    },
-                    count: {$sum: 1},
-                    usersCreatedLastWeek: {
-                        $sum: {
-                            $cond: [
-                                {
-                                    $and: [
-                                        {$gte: ['$timeStamp', startDate]},
-                                        {$lte: ['$timeStamp', endDate]},
-                                    ],
-                                },
-                                1,
-                                0,
-                            ],
-                        },
-                    },
-                },
-            },
-        ]);
-        console.log('ressultDATA', ressult);
-        if (ressult.length == 0) {
-            return {
-                response_code: HttpStatus.OK,
-                response_data: 'Data Not Fund',
-            };
-        }
-        return {
-            response_code: HttpStatus.OK,
-            response_data: ressult,
-        };
-    }
+    
 
     //User singup with mobile number/saving OTP in Db
     public async userSinghWithMobileNumber(userData: UsersDTO): Promise<CommonResponseModel> {
@@ -685,58 +580,17 @@ export class UsersService {
     }
     }
 
-    // get's all delivery boys
-    public async getAllDeliveryBoys(user: UsersDTO): Promise<CommonResponseModel> {
-        if (user.role !== 'Admin') {
-            return {response_code: HttpStatus.UNAUTHORIZED, response_data: 'Sorry !!, you are not allowed to access this api',};
-        }
-        const list = await this.userModel.find({role: 'Delivery Boy'});
-        return {response_code: HttpStatus.OK, response_data: list};
-    }
+   
 
-    // deletes a delivery body
-    public async deleteDeliveryBody(user: UsersDTO, id: string): Promise<CommonResponseModel> {
-        if (user.role !== 'Admin') {
-            return {response_code: HttpStatus.UNAUTHORIZED, response_data: 'Sorry !!, you are not allowed to access this api',};
-        }
-        try {
-            const orders = await this.orderModel.find({assignedTo: id});
-            if (orders.length > 0) {
-                return {
-                    response_code: HttpStatus.BAD_REQUEST,
-                    response_data: `Cannot delete this delivery boy because he has ${orders.length} orders assigned.`
-                };
-            } else {
-                const res = await this.userModel.findByIdAndDelete(id);
-                return {response_code: HttpStatus.OK, response_data: 'Delivery boy deleted successfully'};
-            }
-        } catch (e) {
-            return {response_code: HttpStatus.BAD_REQUEST, response_data: 'Could not delete this delivery boy.'};
-        }
-    }
+   
     
-    // find by id delivery Boy
-    public async getByIdDeliveryBoy(id:string):Promise<CommonResponseModel>{
-        const resData=await this.userModel.findById(id);
-        return{
-            response_code:HttpStatus.OK,
-            response_data:resData
-        }
-    }
+    
     // delivery boy update infomation by AdminF
     public async updateinfomationByAdmin(id:string,user: UsersDTO):Promise<CommonResponseModel>{
         await this.userModel.findByIdAndUpdate(id,user);
         return{
             response_code:HttpStatus.OK,
             response_data:"updated succesfully"
-        }
-    }
-    // // status update devilery Boy
-    public async updateDeliveryBoyStatus( id:string,data:DeliverBoyStatusDTO):Promise<CommonResponseModel>{
-        await this.userModel.findByIdAndUpdate(id,data);
-        return{
-            response_code:HttpStatus.OK,
-            response_data:"Status Update successfully"
         }
     }
    
