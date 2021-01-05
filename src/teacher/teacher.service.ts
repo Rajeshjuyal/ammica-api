@@ -46,11 +46,13 @@ export class TeacherService {
       email: credentials.email,
     });
     if (!teacher) {
+      console.log("No Teacher Found");
       return {
         response_code: HttpStatus.UNAUTHORIZED,
         response_data: `Teacher with email ${credentials.email} is not registered`,
       };
     } else {
+      console.log("Teacher Found")
       const passwordMatch = await this.authService.verifyPassword(
         credentials.password,
         teacher.password,
@@ -60,10 +62,12 @@ export class TeacherService {
         _id: null,
       };
       if (passwordMatch) {
+        console.log("PASSWORD MATCHED")
         body._id = teacher._id;
         body.token = await this.authService.generateAccessToken(teacher._id);
         return { response_code: HttpStatus.OK, response_data: body };
       } else {
+        console.log("PASSWORD NOT MATCHED")
         return {
           response_code: HttpStatus.UNAUTHORIZED,
           response_data: 'enter a valid password',
