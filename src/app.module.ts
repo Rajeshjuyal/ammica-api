@@ -36,6 +36,7 @@ import { TodayclassModule } from './todayclass/todayclass.module';
 import { PerformanceModule } from './performance/performance.module';
 import { ReportcardModule } from './reportcard/reportcard.module';
 import { ParentModule } from './parent/parent.module';
+import { ThemeModule } from './theme/theme.module';
 
 
 @Global()
@@ -80,6 +81,7 @@ import { ParentModule } from './parent/parent.module';
         PerformanceModule,
         ReportcardModule,
         ParentModule,
+        ThemeModule,
     ],
     controllers: [AppController],
     providers: [AppGateway, ChatService],
