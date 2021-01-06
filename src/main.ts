@@ -59,9 +59,9 @@ async function bootstrap() {
     //
     let options;
     if (process.env.NODE_ENV === 'production') {
-        options = new DocumentBuilder().setTitle('Groceries App').setBasePath('/').setVersion('v1').addBearerAuth().setSchemes('https').build();
+        options = new DocumentBuilder().setTitle('Amica App').setBasePath('/').setVersion('v1').addBearerAuth().setSchemes('https').build();
     } else {
-        options = new DocumentBuilder().setTitle('Groceries App').setBasePath('/').setVersion('v1').addBearerAuth().build();
+        options = new DocumentBuilder().setTitle('Amica App').setBasePath('/').setVersion('v1').addBearerAuth().build();
         const networkData = os.networkInterfaces();
         if (process.platform.toString() == 'darwin') {
             globalConfig.localIp = networkData.en0.find(data => data.family === 'IPv4').address;

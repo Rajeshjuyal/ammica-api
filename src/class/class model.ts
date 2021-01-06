@@ -1,10 +1,11 @@
 import * as mongoose from 'mongoose';
 export const ClassSchema = new mongoose.Schema({
-  studentid: { type: String, required: true },
-  teacherid: { type: Number, required: true },
-  marks: { type: String, required: true },
+  day: { type: String, required: true },
+  subject: { type: String, required: true },
+  class: { type: String, required: true },
+  time: { type: String, required: true },
 });
 
 export interface Class {
-  (name: 'string', no_of_student: 'string');
+  (day: 'string', no_of_student: 'string');
 }
