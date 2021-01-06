@@ -53,10 +53,13 @@ export class TeacherService {
       };
     } else {
       console.log("Teacher Found")
+      console.log(credentials.password)
+      console.log(teacher.password)
       const passwordMatch = await this.authService.verifyPassword(
         credentials.password,
         teacher.password,
       );
+      console.log(passwordMatch)
       const body = {
         token: null,
         _id: null,

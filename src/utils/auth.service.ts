@@ -16,14 +16,21 @@ export class AuthService {
 
   // hashes the user's plain text password into a cipher
   public async hashPassword(password: string) {
-    const salt = await this.generateSalt();
-    const hashedPassword = await bcrypt.hash(password, salt);
-    return { salt, hashedPassword };
+    const hashedPassword = await bcrypt.hash(password, 10);
+    return hashedPassword;
   }
 
   // verifies password
   public async verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
-    const passwordMatch = await bcrypt.compare(password, hashedPassword);
+    console.log("Inside Verify")
+    console.log(password)
+    console.log(hashedPassword)
+    let passwordMatch=false
+    if(password == hashedPassword){
+      passwordMatch=true
+    }
+    console.log(passwordMatch)
+    console.log("Outside Verify")
     return passwordMatch;
   }
 
