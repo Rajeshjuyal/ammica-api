@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { Syllabus } from './syllabus.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -19,7 +19,11 @@ export class SyllabusService {
 
   public async findAll() {
     var syllabuss = await this.syllabusModel.find();
-    return [...syllabuss];
+    return {
+      response_code: HttpStatus.OK,
+      response_data: syllabuss
+    };
+    // return [...syllabuss];
   }
 
   public async findOne(id: string) {
