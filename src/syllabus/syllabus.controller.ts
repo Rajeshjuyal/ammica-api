@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { SyllabusService } from './syllabus.service';
 import { Syllabus } from './syllabus.model';
+import { SubjectDTO } from 'src/subject/subject.model';
 
 @Controller('syllabus')
 export class SyllabusController {

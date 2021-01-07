@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { Syllabus } from './syllabus.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { SubjectDTO } from 'src/subject/subject.model';
 
 @Injectable()
 export class SyllabusService {
-  syllabuss: Syllabus[] = [];
   constructor(
     @InjectModel('Syllabus') private readonly syllabusModel: Model<any>,
     @InjectModel('Subject') private readonly subjectModel: Model<any>,
