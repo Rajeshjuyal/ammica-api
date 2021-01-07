@@ -1,12 +1,18 @@
 import * as mongoose from 'mongoose';
 export const ChaptersSchema = new mongoose.Schema({
-  chapter_name: { type: String, required: true },
-  topic_id: { type: String, required: true },
-  video_url: { type: String, required: true },
+  unit: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Unit',
+    required: 'true',
+  },
+  name: { type: String, required: true },
+  id: { type: String, required: true },
+  duration: { type: String, required: true },
 });
 
 export interface Chapters {
-  chapter_name: string;
-  topic_id: string;
-  vidoe_url: string;
+  unit: mongoose.Schema.Types.ObjectId;
+  name: string;
+  id: string;
+  duration: string;
 }

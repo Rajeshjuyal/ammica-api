@@ -8,6 +8,7 @@ export class SyllabusService {
   syllabuss: Syllabus[] = [];
   constructor(
     @InjectModel('Syllabus') private readonly syllabusModel: Model<any>,
+    @InjectModel('Subject') private readonly subjectModel: Model<any>,
   ) {}
 
   public async create(syllabus: Syllabus) {

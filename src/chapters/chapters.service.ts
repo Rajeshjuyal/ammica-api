@@ -8,6 +8,7 @@ export class ChaptersService {
   chapterss: Chapters[] = [];
   constructor(
     @InjectModel('Chapters') private readonly chaptersModel: Model<any>,
+    @InjectModel('Unit') private readonly unitModel: Model<any>
   ) {}
 
   public async create(chapter: Chapters) {

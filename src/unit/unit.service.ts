@@ -6,7 +6,7 @@ import { Model } from 'mongoose';
 @Injectable()
 export class UnitService {
   units: Unit[] = [];
-  constructor(@InjectModel('Unit') private readonly unitModel: Model<any>) {}
+  constructor(@InjectModel('Unit') private readonly unitModel: Model<any>,@InjectModel('Syllabus') private readonly syllabusModel: Model<any>) {}
 
   public async create(unit: Unit) {
     var unit1 = await this.unitModel.create(unit);
