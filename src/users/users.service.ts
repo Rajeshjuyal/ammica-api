@@ -81,15 +81,12 @@ export class UsersService {
                     };
                 }
             }
-            const {hashedPassword} = await this.authService.hashPassword(userData.password);
-            console.log(hashedPassword)
-            console.log("Getting created")
-            userData.password = hashedPassword;
+            // const {hashedPassword} = await this.authService.hashPassword(userData.password);
+            // console.log(hashedPassword)
+            // console.log("Getting created")
+            // userData.password = hashedPassword;
             userData.registrationDate = Date.now();
             userData.emailVerified = userData.role === 'User' ? false : true;
-            userData.totalLoyaltyPoints = 0;
-            userData.loyaltyPoints=[];
-            userData.loyaltyPoints.push({point: 0});
             const verificationId = uuid();
             userData.verificationId = verificationId;
             const response = await this.userModel.create(userData);
