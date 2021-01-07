@@ -1,11 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { Chapters } from './chapter.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 @Injectable()
 export class ChaptersService {
-  chapterss: Chapters[] = [];
   constructor(
     @InjectModel('Chapters') private readonly chaptersModel: Model<any>,
     @InjectModel('Unit') private readonly unitModel: Model<any>
@@ -22,17 +21,25 @@ export class ChaptersService {
     return chapterss;
   }
 
-  public async findOne(id: number) {
+  public async findOne(id: string) {
     var chapterss = await this.chaptersModel.findById(id);
     return chapterss;
   }
 
-  public async update(id: number, chapterdata: Chapters) {
+  public async findByUnit(id:string) {
+    var chapters = await this.chaptersModel.find({unit:id});
+    return {
+      response_code: HttpStatus.OK,
+      response_data: chapters
+    };
+  }
+
+  public async update(id: string, chapterdata: Chapters) {
     var chapterss = await this.chaptersModel.findByIdAndUpdate(id, chapterdata);
     return chapterss;
   }
 
-  public async remove(id: number) {
+  public async remove(id: string) {
     var chapterss = await this.chaptersModel.findByIdAndDelete(id);
     chapterss.remove();
     return chapterss;
