@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { Unit } from './unit .model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -22,6 +22,14 @@ export class UnitService {
   public async findOne(id: string) {
     var units = await this.unitModel.findById(id);
     return units;
+  }
+
+  public async findsyllabus(id:string) {
+    var units = await this.unitModel.find({syllabus: id});
+    return {
+      response_code: HttpStatus.OK,
+      response_data: units
+    };
   }
 
   public async update(id: string, unitdata: Unit) {

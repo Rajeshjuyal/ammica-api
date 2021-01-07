@@ -21,6 +21,11 @@ export class UnitController {
     return this.unitService.findOne(id);
   }
 
+  @Get('bysyllabus/:id')
+  findSyllabus(@Param('id') id: string) {
+    return this.unitService.findsyllabus(id);
+  }
+
   @Put(':id')
   update(@Param('id') id: string, @Body() unitdata:Unit) {
     return this.unitService.update(id, unitdata);

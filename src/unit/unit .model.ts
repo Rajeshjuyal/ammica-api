@@ -7,12 +7,11 @@ export const UnitSchema = new mongoose.Schema({
   },
   id: { type: String, required: true },
   name: { type: String, required: true },
-
   duration: { type: String, required: true },
 });
 
 export interface Unit {
-  syllabus: mongoose.Schema.Types.ObjectId;
+  syllabus: string;
   id: string;
   name: string;
   duration: string;
