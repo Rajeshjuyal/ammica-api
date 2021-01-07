@@ -5,15 +5,13 @@ export const TopicSchema = new mongoose.Schema({
     ref: 'chapter',
     required: 'true',
   },
-  id: { type: String, required: true },
   name: { type: String, required: true },
   videourl: { type: String, required: true },
   Pdf: { type: String, required: true },
 });
 
 export interface Topic {
-  chapter: mongoose.Schema.Types.ObjectId;
-  id: string;
+  chapter: string;
   name: string;
   videourl: string;
   pdf:string;

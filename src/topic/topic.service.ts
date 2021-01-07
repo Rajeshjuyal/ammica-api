@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { Topic } from './topic.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -16,17 +16,34 @@ export class TopicService {
 
   public async findAll() {
     var topics = await this.topicModel.find();
-    return [...topics];
+    return {
+      response_code:HttpStatus.OK,
+      response_data: topics
+    }
   }
 
   public async findOne(id: string) {
     var topics = await this.topicModel.findById(id);
-    return topics;
+    return {
+      response_code:HttpStatus.OK,
+      response_data: topics
+    }
+  }
+
+  public async findByChapter(id:string) {
+    var topics = await this.topicModel.find({chapter:id});
+    return {
+      response_code:HttpStatus.OK,
+      response_data: topics
+    }
   }
 
   public async update(id: string, topicdata: Topic) {
     var topics = await this.topicModel.findByIdAndUpdate(id, topicdata);
-    return topics;
+    return {
+      response_code:HttpStatus.OK,
+      response_data: topics
+    }
   }
 
   public async remove(id: string) {
