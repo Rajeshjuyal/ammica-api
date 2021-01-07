@@ -3,7 +3,7 @@ import { UnitService } from './unit.service';
 import { UnitController } from './unit.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UnitSchema } from './unit .model';
-import { SyllabusSchema } from 'src/syllabus/syllabus.model';
+import { SyllabusSchema } from '../syllabus/syllabus.model';
 
 @Module({
   imports: [

@@ -3,7 +3,7 @@ import { ChaptersService } from './chapters.service';
 import { ChaptersController } from './chapters.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ChaptersSchema } from './chapter.model';
-import { UnitSchema } from 'src/unit/unit .model';
+import { UnitSchema } from '../unit/unit .model';
 
 @Module({
   imports: [
