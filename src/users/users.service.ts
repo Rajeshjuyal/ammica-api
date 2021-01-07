@@ -81,10 +81,9 @@ export class UsersService {
                     };
                 }
             }
-            const {salt, hashedPassword} = await this.authService.hashPassword(userData.password);
+            const {hashedPassword} = await this.authService.hashPassword(userData.password);
             console.log(hashedPassword)
             console.log("Getting created")
-            userData.salt = salt;
             userData.password = hashedPassword;
             userData.registrationDate = Date.now();
             userData.emailVerified = userData.role === 'User' ? false : true;
