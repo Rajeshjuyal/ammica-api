@@ -82,6 +82,7 @@ export class UsersService {
                 }
             }
             const {salt, hashedPassword} = await this.authService.hashPassword(userData.password);
+            console.log(hashedPassword)
             console.log("Getting created")
             userData.salt = salt;
             userData.password = hashedPassword;
