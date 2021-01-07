@@ -22,6 +22,11 @@ export class SyllabusController {
     return this.syllabusService.findOne(id);
   }
 
+  @Get('bysubject/:id')
+  findSubject(@Param('id') id: string) {
+    return this.syllabusService.findsubject(id);
+  }
+
   @Put(':id')
   update(@Param('id') id: string, @Body() syllabusdata: Syllabus) {
     return this.syllabusService.update(id, syllabusdata);

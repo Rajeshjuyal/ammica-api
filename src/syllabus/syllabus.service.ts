@@ -20,13 +20,15 @@ export class SyllabusService {
   public async findAll() {
     var syllabuss = await this.syllabusModel.find();
     return [...syllabuss];
-
-    return `This action returns all syllabus`;
   }
 
   public async findOne(id: string) {
     var syllabuss = await this.syllabusModel.findById(id);
     return syllabuss;
+  }
+
+  public async findsubject(id: string){
+    var syllabuss = await this.syllabusModel.findById({subject: id});
   }
 
   public async update(id: string, syllabusdata: Syllabus) {
