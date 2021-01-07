@@ -33,7 +33,10 @@ export class SyllabusService {
 
   public async findsubject(id: string){
     var syllabuss = await this.syllabusModel.find({subject: id});
-    return syllabuss;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: syllabuss
+    };
   }
 
   public async update(id: string, syllabusdata: Syllabus) {
