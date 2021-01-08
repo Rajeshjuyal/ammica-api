@@ -8,6 +8,7 @@ export class AssignemntService {
   assignments: Assignment[] = [];
   constructor(
     @InjectModel('Assignment') private readonly assignmentModel: Model<any>,
+    @InjectModel('Teacher') private readonly teacherModel: Model<any>,
   ) {}
   public async create(assignment: Assignment) {
     var assignment1 = await this.assignmentModel.create(assignment);

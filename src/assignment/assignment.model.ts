@@ -1,12 +1,18 @@
 import * as mongoose from 'mongoose';
 export const AssignmentSchema = new mongoose.Schema({
-  studentid: { type: String, required: true },
-  teacherid: { type: Number, required: true },
-  marks: { type: String, required: true },
+  name: { type: String, required: true },
+  teacher: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Teacher',
+    required: true,
+  },
+  marks: { type: Number },
+  noofquestions: { type: Number, default:0 },
 });
 
 export interface Assignment {
-  studentid: string;
-  teacherid: number;
+  name: string;
+  teacherid: string;
   marks: string;
+  noofquestions: number;
 }
