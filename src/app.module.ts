@@ -38,6 +38,7 @@ import { ReportcardModule } from './reportcard/reportcard.module';
 import { ParentModule } from './parent/parent.module';
 import { ThemeModule } from './theme/theme.module';
 import { SchoolModule } from './school/school.module';
+import { QuestionsModule } from './questions/questions.module';
 
 
 @Global()
@@ -84,6 +85,7 @@ import { SchoolModule } from './school/school.module';
         ParentModule,
         ThemeModule,
         SchoolModule,
+        QuestionsModule,
     ],
     controllers: [AppController],
     providers: [AppGateway, ChatService],

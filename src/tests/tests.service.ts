@@ -9,7 +9,7 @@ export class TestsService {
   testss: Test[] = [];
   constructor(
     @InjectModel('Test') private readonly testModel: Model<any>,
-    @InjectModel('Assignment') private readonly assignmentModel: Model<any>,
+    @InjectModel('Question') private readonly questionModel: Model<any>,
   ) {}
 
   public async create(tests: Test) {

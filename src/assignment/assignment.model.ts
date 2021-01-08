@@ -6,13 +6,15 @@ export const AssignmentSchema = new mongoose.Schema({
     ref: 'Teacher',
     required: true,
   },
-  marks: { type: Number },
+  startdate: { type: String, required: true },
+  enddate: { type: String, required: true },
   noofquestions: { type: Number, default:0 },
 });
 
 export interface Assignment {
   name: string;
   teacher: string;
-  marks: string;
+  startdate: string;
+  enddate: string;
   noofquestions: number;
 }
