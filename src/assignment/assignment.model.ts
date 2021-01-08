@@ -12,7 +12,7 @@ export const AssignmentSchema = new mongoose.Schema({
 
 export interface Assignment {
   name: string;
-  teacherid: string;
+  teacher: string;
   marks: string;
   noofquestions: number;
 }
