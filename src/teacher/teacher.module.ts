@@ -8,10 +8,11 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from '../utils/teacher-jwt.stratergy';
 import { globalConfig } from '../utils/app-service-data';
 import { AuthService } from '../utils/auth.service';
+import { SchoolSchema } from '../school/school.model';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Teacher', schema: TeacherSchema }]),
+    MongooseModule.forFeature([{ name: 'Teacher', schema: TeacherSchema },{ name: 'School', schema: SchoolSchema }]),
     JwtModule.register({
       secret: globalConfig.secret,
       signOptions: {

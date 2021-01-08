@@ -11,6 +11,7 @@ export class TeacherService {
   teachers: Teacher[] = [];
   constructor(
     @InjectModel('Teacher') private readonly teacherModel: Model<any>,
+    @InjectModel('School') private readonly schoolModel: Model<any>,
     private jwtService: JwtService,
     private authService: AuthService,
   ) {}

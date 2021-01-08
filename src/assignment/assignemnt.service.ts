@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { Assignment } from './assignment.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -18,12 +18,18 @@ export class AssignemntService {
 
   public async findAll() {
     var assignmentss = await this.assignmentModel.find();
-    return [...assignmentss];
+    return {
+      response_code: HttpStatus.OK,
+      response_data: assignmentss
+    }
   }
 
   public async findOne(id: string) {
     var assignments = await this.assignmentModel.findById(id);
-    return assignments;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: assignments
+    }
   }
 
   public async update(id: string, assignmentdata: Assignment) {
@@ -31,11 +37,17 @@ export class AssignemntService {
       id,
       assignmentdata,
     );
-    return assignments;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: assignments
+    }
   }
   public async remove(id: string) {
     var assignmentss = await this.assignmentModel.findByIdAndDelete(id);
     assignmentss.remove();
-    return assignmentss;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: "Assignments Deleted Successfully"
+    }
   }
 }
