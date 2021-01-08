@@ -1,15 +1,24 @@
 import * as mongoose from 'mongoose';
 export const TestSchema = new mongoose.Schema({
-  testid: { type: String, required: true },
-  subjectid: { type: String, required: true },
-  time: { type: String, required: true },
-  marks: { type: String, required: true },
-  obtained_marks: { type: String, required: true },
+  question: { type: String, required: true },
+  option1: { type: String, required: true },
+  option2: { type: String, required: true },
+  option3: { type: String, required: true },
+  option4: { type: String, required: true },
+  answer: { type: String, required: true },
+  assignment: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Assignment',
+    required: 'true',
+  },
 });
 
 export interface Test {
-  testid: string;
-  subjectid: string;
-  time: string;
-  marks: string;
+  assignment: string;
+  question: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  answer: string;
 }

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { TestsService } from './tests.service';
 import { Test } from './test.model';
 
@@ -19,6 +27,10 @@ export class TestsController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.testsService.findOne(id);
+  }
+  @Get('byassignment/:id')
+  findassignment(@Param('id') id: string) {
+    return this.testsService.findAssignment(id);
   }
 
   @Put(':id')

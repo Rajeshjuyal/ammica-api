@@ -28,7 +28,10 @@ export class SyllabusService {
 
   public async findOne(id: string) {
     var syllabuss = await this.syllabusModel.findById(id);
-    return syllabuss;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: syllabuss
+    };
   }
 
   public async findsubject(id: string){
@@ -44,12 +47,18 @@ export class SyllabusService {
       id,
       syllabusdata,
     );
-    return syllabuss;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: syllabuss
+    };
   }
 
   public async remove(id: string) {
     var syllabus = await this.syllabusModel.findByIdAndDelete(id);
     syllabus.remove();
-    return syllabus;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: "Syllabus Deleted Successfully"
+    };
   }
 }
