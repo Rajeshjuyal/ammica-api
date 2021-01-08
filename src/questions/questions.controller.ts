@@ -7,8 +7,8 @@ export class QuestionsController {
   constructor(private readonly questionsService: QuestionsService) {}
 
   @Post()
-  create(@Body() createQuestionDto: Question) {
-    return this.questionsService.create(createQuestionDto);
+  create(@Body() question: Question) {
+    return this.questionsService.create(question);
   }
 
   @Get()
@@ -20,6 +20,12 @@ export class QuestionsController {
   findOne(@Param('id') id: string) {
     return this.questionsService.findOne(id);
   }
+
+  @Get('byassignment/:id')
+  findByAssignment(@Param('id') id: string) {
+    return this.questionsService.findAssignment(id);
+  }
+
 
   @Put(':id')
   update(@Param('id') id: string, @Body() Question: Question) {
