@@ -4,12 +4,12 @@ export const SchoolSchema = new mongoose.Schema({
   logo: { type: String, required: true },
   location: { type: String },
   board: { type: String, required: true },
-  totalstudent: { type: String},
+  totalstudent: { type: Number},
 });
 export interface School {
   logo: string;
   name: string;
   location: string;
-  branch: string;
-  totalstudent: string;
+  board: string;
+  totalstudent: number;
 }
