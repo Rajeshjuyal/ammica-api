@@ -304,7 +304,6 @@ export class UsersUpdateDTO {
 
 export class CredentialsDTO {
   @IsNotEmpty()
-  @IsEmail()
   @ApiModelProperty()
   email: string;
   
