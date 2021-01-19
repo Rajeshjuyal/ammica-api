@@ -1,15 +1,10 @@
 import {Global, HttpModule, Module} from '@nestjs/common';
 import {UsersModule} from './users/users.module';
 import {UploadModule} from './upload/upload.module';
-import {NotificationsModule} from './notifications/notifications.module';
 import {AppController} from './app.controller';
 import {ScheduleModule} from 'nest-schedule';
 import {BannerModule} from './Banner/banner.module';
 import {AppGateway} from './app.gateway';
-import {ChatSchema} from './chat/chat.model';
-import {NotificationsSchema} from './notifications/notifications.model';
-import {ChatModule} from './chat/chat.module';
-import {ChatService} from './chat/chat.service';
 import { SeedModule } from './seed/seed.module';
 import { SequenceModule } from './sequence/sequence.module';
 import { TeacherModule } from './teacher/teacher.module';
@@ -26,7 +21,7 @@ import { LibraryModule } from './library/library.module';
 import { SettingModule } from './setting/setting.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TopicModule } from './topic/topic.module';
-import { ChaptersModule } from './chapters/chapters.module';
+import { ChaptersModule } from './chapter/chapters.module';
 import { UnitModule } from './unit/unit.module';
 import { SyllabusModule } from './syllabus/syllabus.module';
 import { TestsModule } from './tests/tests.module';
@@ -36,9 +31,9 @@ import { TodayclassModule } from './todayclass/todayclass.module';
 import { PerformanceModule } from './performance/performance.module';
 import { ReportcardModule } from './reportcard/reportcard.module';
 import { ParentModule } from './parent/parent.module';
-import { ThemeModule } from './theme/theme.module';
 import { SchoolModule } from './school/school.module';
-import { QuestionsModule } from './questions/questions.module';
+import { QuestionModule } from './question/question.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 
 @Global()
@@ -53,12 +48,10 @@ import { QuestionsModule } from './questions/questions.module';
             }),
         }),
         UsersModule,
-        UploadModule,
         NotificationsModule,
+        UploadModule,
         ScheduleModule.register(),
         BannerModule,
-        ChatModule,
-        MongooseModule.forFeature([{name: 'Notifications', schema: NotificationsSchema}, {name: 'Chat', schema: ChatSchema}]),
         SeedModule,
         SequenceModule,
         AttendenceModule,
@@ -83,12 +76,11 @@ import { QuestionsModule } from './questions/questions.module';
         PerformanceModule,
         ReportcardModule,
         ParentModule,
-        ThemeModule,
         SchoolModule,
-        QuestionsModule,
+        QuestionModule,
     ],
     controllers: [AppController],
-    providers: [AppGateway, ChatService],
+    providers: [AppGateway],
     exports: [AppGateway]
 })
 export class AppModule {

@@ -8,15 +8,15 @@ import {
   Delete,
 } from '@nestjs/common';
 import { TeacherService } from './teacher.service';
-import { Teacher, CredentialsDTO } from './teacher.model';
+import { Teacher } from './teacher.model';
 
 @Controller('teacher')
 export class TeacherController {
   constructor(private readonly teacherService: TeacherService) {}
 
   @Post()
-  create(@Body() teacherdata: Teacher) {
-    return this.teacherService.create(teacherdata);
+  create(@Body() data: Teacher) {
+    return this.teacherService.create(data);
   }
 
   @Get()
@@ -28,18 +28,22 @@ export class TeacherController {
   findOne(@Param('id') id: string) {
     return this.teacherService.findOne(id);
   }
+  @Get('byUser/:id')
+  findbyUser(@Param('id') id: string) {
+    return this.teacherService.findSchool(id);
+  }
+  @Get('bySchool/:id')
+  findbySchool(@Param('id') id: string) {
+    return this.teacherService.findSchool(id);
+  }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() teacherdata: Teacher) {
-    return this.teacherService.update(id, teacherdata);
+  update(@Param('id') id: string, @Body() data: Teacher) {
+    return this.teacherService.update(id, data);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.teacherService.remove(id);
-  }
-  @Post('/login')
-  public validateUser(@Body() credentials: CredentialsDTO) {
-    return this.teacherService.validateUserCredentials(credentials);
   }
 }

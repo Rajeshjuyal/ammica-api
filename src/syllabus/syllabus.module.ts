@@ -7,7 +7,10 @@ import { SubjectSchema } from '../subject/subject.model';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Syllabus', schema: SyllabusSchema },{ name: 'Subject', schema: SubjectSchema }]),
+    MongooseModule.forFeature([
+      { name: 'Syllabus', schema: SyllabusSchema },
+      { name: 'Subject', schema: SubjectSchema },
+    ]),
   ],
   controllers: [SyllabusController],
   providers: [SyllabusService],

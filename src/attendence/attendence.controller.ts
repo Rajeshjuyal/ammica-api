@@ -29,6 +29,10 @@ export class AttendenceController {
   findOne(@Param('id') id: string) {
     return this.attendenceService.findOne(id);
   }
+  @Get('byPeriod/:id')
+  findPeriod(@Param('id') id: string) {
+    return this.attendenceService.findPeriod(id);
+  }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() attendencebody: Attendence) {

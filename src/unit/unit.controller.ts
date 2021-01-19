@@ -1,6 +1,14 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { UnitService } from './unit.service';
-import{Unit} from './unit .model'
+import { Unit } from './unit .model';
 
 @Controller('Unit')
 export class UnitController {
@@ -20,14 +28,13 @@ export class UnitController {
   findOne(@Param('id') id: string) {
     return this.unitService.findOne(id);
   }
-
   @Get('bysyllabus/:id')
-  findSyllabus(@Param('id') id: string) {
-    return this.unitService.findsyllabus(id);
+  findbySyllabus(@Param('id') id: string) {
+    return this.unitService.findSyllabus(id);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() unitdata:Unit) {
+  update(@Param('id') id: string, @Body() unitdata: Unit) {
     return this.unitService.update(id, unitdata);
   }
 

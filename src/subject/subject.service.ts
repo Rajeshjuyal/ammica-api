@@ -1,4 +1,4 @@
-import { Injectable, Inject, HttpStatus } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { Subject } from './subject.model';
 
 import { Model } from 'mongoose';
@@ -20,11 +20,7 @@ export class SubjectService {
 
   public async findAll() {
     var subjects = await this.subjectModel.find();
-    return {
-      response_code: HttpStatus.OK,
-      response_data: subjects
-    };
-    // return [...subjects];
+    return [...subjects];
   }
 
   public async findOne(id: string) {

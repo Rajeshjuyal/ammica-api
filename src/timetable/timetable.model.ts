@@ -1,23 +1,25 @@
 import * as mongoose from 'mongoose';
 export const TimetableSchema = new mongoose.Schema({
-  tt_day: { type: String, required: true },
-  tt_subject: { type: String, required: true },
-  tt_teacherid: { type: String, required: true },
-  tt_period1: { type: String, required: true },
-  tt_period2: { type: String, required: true },
-  tt_period3: { type: String, required: true },
-  tt_period4: { type: String, required: true },
-  tt_period5: { type: String, required: true },
-  tt_period6: { type: String, required: true },
+  school: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'School',
+    required: true,
+  },
+  section: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Section',
+    required: true,
+  },
+
+  day: { type: String, required: true },
+
+  duration_of_one_period: { type: String, required: true },
 });
 
 export interface Timetable {
-  tt_day: string;
-  tt_period1: string;
-  tt_period2: string;
-  tt_period3: string;
-  tt_period4: string;
-  tt_period5: string;
-  tt_period6: string;
-  tt_period7: string;
+  school: string;
+  section: string;
+  day: string;
+
+  duration_of_one_period: string;
 }

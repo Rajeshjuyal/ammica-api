@@ -28,6 +28,14 @@ export class StudentController {
   findOne(@Param('id') id: string) {
     return this.studentService.findOne(id);
   }
+  @Get('byuser/:id')
+  findbyuser(@Param('id') id: string) {
+    return this.studentService.findUser(id);
+  }
+  @Get('bysection/:id')
+  findbySection(@Param('id') id: string) {
+    return this.studentService.findSection(id);
+  }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() studentdata: Student) {

@@ -1,7 +1,6 @@
 import {Injectable, HttpStatus, Catch, BadRequestException} from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
 import {Model} from 'mongoose';
-import {NotificationsModel} from '../notifications/notifications.model';
 
 import {
     UsersDTO,
@@ -11,7 +10,6 @@ import {
     UsersUpdateDTO,
     DeviceTokenDTO,
     CredentialsMobileDTO,
-    DeliverBoyStatusDTO,
     
     PushNotificationDTO,
 } from './users.model';
@@ -65,19 +63,19 @@ export class UsersService {
 
     // registers a new user
     public async registerNewUser(userData: UsersDTO): Promise<CommonResponseModel> {
-        if (userData.role === 'User' || userData.role === 'Admin' || userData.role === 'Delivery Boy') {
+        if (userData.role === 'User' || userData.role === 'Admin' || userData.role === 'SuperAdmin') {
             userData.email=userData.email.toLowerCase();
             const check = await this.userModel.findOne({email: userData.email});
             if (check) {
                 console.log("User exists")
                 return {response_code: HttpStatus.UNAUTHORIZED, response_data: `User with email ${userData.email} is already registered`};
             }
-            if (userData.role === 'Admin') {
-                const checkIfAdminExist = await this.userModel.findOne({role: 'Admin'});
+            if (userData.role === 'SuperAdmin') {
+                const checkIfAdminExist = await this.userModel.findOne({role: 'SuperAdmin'});
                 if (checkIfAdminExist) {
                     return {
                         response_code: HttpStatus.BAD_REQUEST,
-                        response_data: 'An admin account exist.',
+                        response_data: 'An super admin account exist.',
                     };
                 }
             }
@@ -86,31 +84,31 @@ export class UsersService {
             // console.log("Getting created")
             // userData.password = hashedPassword;
             userData.registrationDate = Date.now();
-            userData.emailVerified = userData.role === 'User' ? false : true;
+            userData.emailVerified = true;
             const verificationId = uuid();
             userData.verificationId = verificationId;
             const response = await this.userModel.create(userData);
-            console.log("CReated")
+            console.log("Created")
             if (response._id) {
-                const {body, subject, htmlData} = this.getEmailVerificationFields(verificationId);
-                const emailRes = await this.utilService.sendEmail(userData.email, subject, body, htmlData);
-                console.log(emailRes)
-                if (emailRes && emailRes.length > 0) {
-                    return {
-                      response_code: HttpStatus.CREATED,
-                        response_data:'Account created successfully. A verification link is sent your email, Please verify your email',
-                    };
-                } else {
+                // const {body, subject, htmlData} = this.getEmailVerificationFields(verificationId);
+                // const emailRes = await this.utilService.sendEmail(userData.email, subject, body, htmlData);
+                // console.log(emailRes)
+                // if (emailRes && emailRes.length > 0) {
+                //     return {
+                //       response_code: HttpStatus.CREATED,
+                //         response_data:'Account created successfully. A verification link is sent your email, Please verify your email',
+                //     };
+                // } else {
                     return {
                         response_code: HttpStatus.CREATED,
                         response_data: {message: 'Account created successfully'},
                     };
-                }
+                // }
             }
         } else {
             return {
                 response_code: HttpStatus.BAD_REQUEST,
-                response_data: 'Role Should be User Or Delivery Boy'
+                response_data: 'Role Should be Admin Or School Or Teacher Or Student Or Parent'
             };
         }
     }

@@ -3,7 +3,6 @@ import * as AWS from 'aws-sdk';
 import {CommonResponseModel, globalConfig} from '../utils/app-service-data';
 import * as uuid from 'uuid/v1';
 import * as mailer from 'nodemailer';
-import {NotificationsModel} from '../notifications/notifications.model';
 const NodeGeocoder = require('node-geocoder');
 const geocoder = NodeGeocoder(globalConfig.geoCoderOption);
 import * as Stripe from 'stripe';
@@ -236,13 +235,9 @@ export class UploadService {
         return response;
     }
     // sends notifications
-    public async sendNotification(token: string, notification?: NotificationsModel): Promise<CommonResponseModel> {
+    public async sendNotification(token: string): Promise<CommonResponseModel> {
         const message = {
             notification: {
-                title: notification ? notification.title : 'Registration confirmation',
-                body: notification
-                    ? notification.description
-                    : 'You have successfully subscribed to notifications',
                 image:
                     'https://res.cloudinary.com/ddrvlb0rx/image/upload/v1568614806/Group_2006_cygw4b.png',
             },

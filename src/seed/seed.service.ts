@@ -8,9 +8,7 @@ const appRoot = require('app-root-path');
 export class SeedService {
     constructor(
         @InjectModel('Users') private readonly userModel: Model<any>,
-        @InjectModel('Notifications') private readonly notificationModel: Model<any>,
         @InjectModel('Banner') private readonly bannerModel: Model<any>,
-        @InjectModel('Chat') private readonly chatModel: Model<any>,
         @InjectModel('Sequence') private readonly sequenceModel: Model<any>,
         ) {
        
@@ -82,11 +80,6 @@ export class SeedService {
                             console.log(`${dir}:-`,JSON.stringify(docCount.length))
                         }
                         
-                        if(dir=="chats"){
-                            await this.chatModel.deleteMany({})
-                            let docCount=await this.chatModel.create(data)
-                            console.log(`${dir}:-`,JSON.stringify(docCount.length))
-                        }
                         if(dir=="sequences"){
                             await this.sequenceModel.deleteMany({})
                             let docCount=await this.sequenceModel.create(data)

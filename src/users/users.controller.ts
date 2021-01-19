@@ -20,7 +20,7 @@ import {
     VerifyEmailDTO,
     OTPVerificationDTO,
     PasswordResetDTO,
-    UsersUpdateDTO, DeviceTokenDTO, MobileDTO, CredentialsMobileDTO, DeliverBoyStatusDTO, PushNotificationDTO, 
+    UsersUpdateDTO, DeviceTokenDTO, MobileDTO, CredentialsMobileDTO, PushNotificationDTO, 
 } from './users.model';
 import {UsersService} from './users.service';
 import {ApiBearerAuth} from '@nestjs/swagger';

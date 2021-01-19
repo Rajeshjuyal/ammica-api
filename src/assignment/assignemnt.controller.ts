@@ -29,6 +29,10 @@ export class AssignemntController {
   findOne(@Param('id') id: string) {
     return this.assignmentService.findOne(id);
   }
+  @Get('byschool/:id')
+  findbySchool(@Param('id') id: string) {
+    return this.assignmentService.findSchool(id);
+  }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() assignmentdata: Assignment) {

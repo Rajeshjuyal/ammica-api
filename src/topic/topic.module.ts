@@ -3,10 +3,15 @@ import { TopicService } from './topic.service';
 import { TopicController } from './topic.controller';
 import { TopicSchema } from './topic.model';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ChaptersSchema } from '../chapters/chapter.model';
+import { ChaptersSchema } from '../chapter/chapter.model';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Topic', schema: TopicSchema },{ name: 'Chapters', schema: ChaptersSchema }])],
+  imports: [
+    MongooseModule.forFeature([
+      { name: 'Topic', schema: TopicSchema },
+      { name: 'Chapter', schema: ChaptersSchema },
+    ]),
+  ],
   controllers: [TopicController],
   providers: [TopicService],
 })

@@ -118,23 +118,16 @@ export const UsersSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export class CoOridnatesDTO {
-  @IsOptional()
-  @Equals('Point')
-  @ApiModelProperty()
-  type: string;
-
-  @IsOptional()
-  @IsArray()
-  @ApiModelProperty()
-  coordinates: Array<number>;
-}
 //only These role should be created
 enum RoleType {
   User = 'User',
-  DileveryBoy= 'Delivery Boy',
   Admin='Admin',
-  //Manager='Manager'
+  SuperAdmin= 'SuperAdmin',
+  School='School',
+  Teacher='Teacher',
+  Parent='Parent',
+  Student='Student',
+  Subscriber='Subscriber',
 }
 
 
@@ -203,12 +196,6 @@ export class UsersDTO {
 
   @IsOptional()
   verificationId: string;
-
-  @IsOptional()
-  @ValidateNested()
-  @Type(() => CoOridnatesDTO)
-  @ApiModelProperty()
-  location: CoOridnatesDTO;
 
   @IsOptional()
   @IsNumber()
@@ -282,12 +269,6 @@ export class UsersUpdateDTO {
 
   @IsOptional()
   verificationId: string;
-
-  @IsOptional()
-  @ValidateNested()
-  @Type(() => CoOridnatesDTO)
-  @ApiModelProperty()
-  location: CoOridnatesDTO;
 
   @IsOptional()
   @IsNumber()
@@ -412,12 +393,7 @@ export class MobileDTO {
   mobileNumber: string;
 }
 
-//deliveryBoy status update model
-export class DeliverBoyStatusDTO{
-  @IsNotEmpty()
-  @ApiModelProperty()
-  status:boolean
-}
+
 
 //only for admin
 export class ExportedFileDTO{

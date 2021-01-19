@@ -5,6 +5,7 @@ export const TopicSchema = new mongoose.Schema({
     ref: 'chapter',
     required: 'true',
   },
+  id: { type: String, required: true },
   name: { type: String, required: true },
   videourl: { type: String, required: true },
   Pdf: { type: String, required: true },
@@ -12,7 +13,8 @@ export const TopicSchema = new mongoose.Schema({
 
 export interface Topic {
   chapter: string;
+  id: string;
   name: string;
   videourl: string;
-  pdf:string;
+  pdf: string;
 }
