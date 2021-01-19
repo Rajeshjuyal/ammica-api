@@ -63,7 +63,7 @@ export class UsersService {
 
     // registers a new user
     public async registerNewUser(userData: UsersDTO): Promise<CommonResponseModel> {
-        if (userData.role === 'User' || userData.role === 'Admin' || userData.role === 'SuperAdmin') {
+        if (userData.role === 'User' || userData.role === 'Admin' || userData.role === 'SuperAdmin' || userData.role === 'Student' || userData.role === 'School' || userData.role === 'Teacher' || userData.role === 'Parent') {
             userData.email=userData.email.toLowerCase();
             const check = await this.userModel.findOne({email: userData.email});
             if (check) {
