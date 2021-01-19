@@ -91,6 +91,7 @@ export class UsersController {
     // sends request to validate user's credentials
     @Post('/login')
     public validateUser(@Body() credentials: CredentialsDTO): Promise<CommonResponseModel> {
+        console.log("Login called")
         return this.userService.validateUserCredentials(credentials);
     }
 
