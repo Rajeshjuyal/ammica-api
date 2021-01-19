@@ -34,6 +34,7 @@ import { ParentModule } from './parent/parent.module';
 import { SchoolModule } from './school/school.module';
 import { QuestionModule } from './question/question.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { SectionModule } from './section/section.module';
 
 
 @Global()
@@ -78,6 +79,7 @@ import { NotificationsModule } from './notifications/notifications.module';
         ParentModule,
         SchoolModule,
         QuestionModule,
+        SectionModule
     ],
     controllers: [AppController],
     providers: [AppGateway],
