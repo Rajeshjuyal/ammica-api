@@ -8,7 +8,6 @@ export const SchoolSchema = new mongoose.Schema({
   board: { type: String, required: true },
   totalstudent: { type: String, required: true },
   contact_no: { type: String, required: true },
-  image: { type: String, required: true },
 });
 export interface School {
   user: string;
