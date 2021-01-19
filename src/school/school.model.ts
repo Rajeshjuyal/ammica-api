@@ -1,7 +1,6 @@
 import * as mongoose from 'mongoose';
 export const SchoolSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  id: { type: String, required: true },
   name: { type: String, required: true },
   logo: { type: String, required: true },
   location: { type: String, required: true },
@@ -11,12 +10,11 @@ export const SchoolSchema = new mongoose.Schema({
 });
 export interface School {
   user: string;
-  id: string;
+  _id: string;
   logo: string;
   name: string;
   location: string;
   board: string;
-  branch: string;
   totalstudent: string;
   contact_no: string;
 }
