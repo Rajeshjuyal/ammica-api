@@ -11,13 +11,9 @@ import { UsersSchema } from '../users/users.model';
     MongooseModule.forFeature([
       { name: 'Attendance', schema: AttendanceSchema },
       { name: 'User', schema: UsersSchema },
-      { name: 'Period', schema: PeriodSchema },
-      
     ]),
-    
   ],
   controllers: [AttendenceController],
   providers: [AttendenceService],
-  
 })
 export class AttendenceModule {}

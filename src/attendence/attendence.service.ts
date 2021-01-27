@@ -7,9 +7,8 @@ export class AttendenceService {
   attendences: Attendence[] = [];
   constructor(
     @InjectModel('Attendance') private readonly attendanceModel: Model<any>,
-    @InjectModel('Period') private readonly periodModel: Model<any>,
+
     @InjectModel('User') private readonly userModel: Model<any>,
-  
   ) {}
   public async create(attendence: Attendence) {
     console.log('In function');
@@ -42,7 +41,7 @@ export class AttendenceService {
       response_data: attendence,
     };
   }
-  
+
   public async update(id: string, attendencedata: Attendence) {
     var attendence = await this.attendanceModel.findByIdAndUpdate(
       id,

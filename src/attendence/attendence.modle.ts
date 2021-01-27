@@ -5,11 +5,7 @@ export const AttendanceSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  Period: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Period',
-    required: true,
-  },
+  date:{type:Date,required:true},
   present:{type:Boolean,required:true}
 });
 
