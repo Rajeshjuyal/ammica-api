@@ -8,6 +8,7 @@ export class AttendenceService {
   constructor(
     @InjectModel('Attendance') private readonly attendanceModel: Model<any>,
     @InjectModel('Period') private readonly periodModel: Model<any>,
+    @InjectModel('User') private readonly userModel: Model<any>,
   
   ) {}
   public async create(attendence: Attendence) {
