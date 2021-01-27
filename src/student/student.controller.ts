@@ -38,8 +38,12 @@ export class StudentController {
   }
 
   @Get('todayclasses/:id')
-  tClasses(@Param('id') id: string) {
-    return this.studentService.todayClasses(id);
+  tClasses(@Param('id') id: string, @Param('Day') day: string) {
+    return this.studentService.todayClasses(id, day);
+  }
+  @Get('timetable/:id')
+  myTimetable(@Param('id') id: string) {
+    return this.studentService.timetable(id);
   }
 
   @Put(':id')

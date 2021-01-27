@@ -32,7 +32,16 @@ export class StudentService {
     };
   }
 
-  public async todayClasses(id: string) {
+  public async todayClasses(id: string, day: string) {
+    var student = await this.studentModel.findById(id);
+    var periods = await this.periodModel.find({ section: student.section, Day: day }).populate('subject')
+    return {
+      response_code: HttpStatus.OK,
+      response_data: periods
+    };
+  }
+
+  public async timetable(id: string) {
     var student = await this.studentModel.findById(id);
     var periods = await this.periodModel.find({ section: student.section }).populate('subject')
     return {
