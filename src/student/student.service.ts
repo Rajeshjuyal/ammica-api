@@ -10,10 +10,10 @@ import { InjectModel } from '@nestjs/mongoose';
 export class StudentService {
   constructor(
     @InjectModel('Student') private readonly studentModel: Model<any>,
-      @InjectModel('User') private readonly userModel: Model<any>,
-      @InjectModel('Section') private readonly sectionModel:Model<any>,
-      @InjectModel('Period') private readonly periodModel:Model<any>,
-      ){}
+    @InjectModel('User') private readonly userModel: Model<any>,
+    @InjectModel('Section') private readonly sectionModel: Model<any>,
+    @InjectModel('Period') private readonly periodModel: Model<any>,
+  ) {}
 
   public async create(student: Student) {
     var student1 = await this.studentModel.create(student);
@@ -35,20 +35,25 @@ export class StudentService {
   public async todayClasses(id: string, day: string) {
     var user = await this.userModel.findById(id);
     var student = await this.studentModel.find({ user: user._id });
-    var periods = await this.periodModel.find({ section: student[0].section, Day: day }).populate('subject')
+    console.log(student);
+    var periods = await this.periodModel
+      .find({ section: student[0].section, Day: day })
+      .populate('subject');
     return {
       response_code: HttpStatus.OK,
-      response_data: periods
+      response_data: periods,
     };
   }
 
   public async timetable(id: string) {
     var user = await this.userModel.findById(id);
     var student = await this.studentModel.find({ user: user._id });
-    var periods = await this.periodModel.find({ section: student[0].section }).populate('subject')
+    var periods = await this.periodModel
+      .find({ section: student[0].section })
+      .populate('subject');
     return {
       response_code: HttpStatus.OK,
-      response_data: periods
+      response_data: periods,
     };
   }
 
