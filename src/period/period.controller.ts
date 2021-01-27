@@ -28,6 +28,10 @@ export class PeriodController {
   findOne(@Param('id') id: string) {
     return this.periodService.findOne(id);
   }
+  @Get('teacher/:id')
+  findteacherPeriod(@Param('id') id: string) {
+    return this.periodService.teacherPeriod(id);
+  }
   @Get('bySubject/:id')
   findSubject(@Param('id') id: string) {
     return this.periodService.findSubject(id);

@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PeriodSchema } from './period.model';
 import { SectioSchema } from '../section/sectiom.model';
 import { TimetableSchema } from '../timetable/timetable.model';
+import { UsersSchema } from '../users/users.model';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { TimetableSchema } from '../timetable/timetable.model';
       { name: 'Period', schema: PeriodSchema },
       { name: 'Section', schema: SectioSchema },
       { name: 'Time_table', schema: TimetableSchema },
+      { name: 'User', schema: UsersSchema },
     ]),
   ],
   controllers: [PeriodController],

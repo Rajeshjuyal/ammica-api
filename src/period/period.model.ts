@@ -5,15 +5,20 @@ export const PeriodSchema = new mongoose.Schema({
     ref: 'Subject',
     required: true,
   },
-  time_table:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'time_table',
-    required:true,
+  time_table: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'time_table',
+    required: true,
   },
-  section:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'Section',
-    required:true
+  section: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Section',
+    required: true,
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
   },
   name: { type: String, required: true },
 

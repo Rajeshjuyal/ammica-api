@@ -8,6 +8,7 @@ export class PeriodService {
   periods: Period[] = [];
   constructor(
     @InjectModel('Period') private readonly periodModel: Model<any>,
+    @InjectModel('User') private readonly userModel: Model<any>,
   ) {}
   public async create(data: Period) {
     var period1 = await this.periodModel.create(data);
@@ -51,6 +52,14 @@ export class PeriodService {
     return {
       response_code: HttpStatus.OK,
       response_data: period6,
+    };
+  }
+
+  public async teacherPeriod(id: string) {
+    var periods = await this.periodModel.find({ user: id });
+    return {
+      response_code: HttpStatus.OK,
+      response_data: periods,
     };
   }
 
