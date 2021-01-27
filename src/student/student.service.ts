@@ -34,8 +34,8 @@ export class StudentService {
 
   public async todayClasses(id: string, day: string) {
     var user = await this.userModel.findById(id);
-    var student = await this.studentModel.findById({ user: user._id });
-    var periods = await this.periodModel.find({ section: student.section, Day: day }).populate('subject')
+    var student = await this.studentModel.find({ user: user._id });
+    var periods = await this.periodModel.find({ section: student[0].section, Day: day }).populate('subject')
     return {
       response_code: HttpStatus.OK,
       response_data: periods
@@ -44,8 +44,8 @@ export class StudentService {
 
   public async timetable(id: string) {
     var user = await this.userModel.findById(id);
-    var student = await this.studentModel.findById({ user: user._id });
-    var periods = await this.periodModel.find({ section: student.section }).populate('subject')
+    var student = await this.studentModel.find({ user: user._id });
+    var periods = await this.periodModel.find({ section: student[0].section }).populate('subject')
     return {
       response_code: HttpStatus.OK,
       response_data: periods
