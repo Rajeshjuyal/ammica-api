@@ -11,7 +11,9 @@ export class StudentService {
   constructor(
     @InjectModel('Student') private readonly studentModel: Model<any>,
       @InjectModel('User') private readonly userModel: Model<any>,
-      @InjectModel('Section') private readonly sectionModel:Model<any>,){}
+      @InjectModel('Section') private readonly sectionModel:Model<any>,
+      @InjectModel('Period') private readonly periodModel:Model<any>,
+      ){}
 
   public async create(student: Student) {
     var student1 = await this.studentModel.create(student);
@@ -27,6 +29,15 @@ export class StudentService {
     return {
       response_code: HttpStatus.OK,
       response_data: students,
+    };
+  }
+
+  public async todayClasses(id: string) {
+    var student = await this.studentModel.findById(id);
+    var periods = await this.periodModel.find({ section: student.section }).populate('subject')
+    return {
+      response_code: HttpStatus.OK,
+      response_data: periods
     };
   }
 

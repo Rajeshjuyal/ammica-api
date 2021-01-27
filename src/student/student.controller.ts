@@ -37,6 +37,11 @@ export class StudentController {
     return this.studentService.findSection(id);
   }
 
+  @Get('todayclasses/:id')
+  tClasses(@Param('id') id: string) {
+    return this.studentService.todayClasses(id);
+  }
+
   @Put(':id')
   update(@Param('id') id: string, @Body() studentdata: Student) {
     return this.studentService.update(id, studentdata);
