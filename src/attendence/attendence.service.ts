@@ -34,6 +34,15 @@ export class AttendenceService {
       response_data: attendence,
     };
   }
+
+  public async userAttendance(id: string) {
+    var attendence = await this.attendanceModel.find({ user: id });
+    return {
+      response_code: HttpStatus.OK,
+      response_data: attendence,
+    };
+  }
+
   public async findPeriod(id: string) {
     var attendence = await this.attendanceModel.find({ period: id });
     return {
