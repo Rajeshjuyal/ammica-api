@@ -5,10 +5,12 @@ export const AttendanceSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  date:{type:Date,required:true},
-  present:{type:Boolean,required:true}
+  date: { type: Date, required: true },
+  present: { type: Boolean, required: true },
 });
 
 export interface Attendence {
-  period: string;
+  user: string;
+  date: string;
+  present: string;
 }
