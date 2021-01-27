@@ -39,6 +39,8 @@ export class StudentController {
 
   @Get('todayclasses/:id')
   tClasses(@Param('id') id: string, @Param('Day') day: string) {
+    console.log('request');
+    console.log(request);
     return this.studentService.todayClasses(id, day);
   }
   @Get('timetable/:id')
