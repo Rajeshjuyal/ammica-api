@@ -39,7 +39,7 @@ export class StudentService {
     console.log(day);
     var periods = await this.periodModel
       .find({ section: student[0].section, Day: day })
-      .populate('subject');
+      .populate('subject teacher');
     return {
       response_code: HttpStatus.OK,
       response_data: periods,

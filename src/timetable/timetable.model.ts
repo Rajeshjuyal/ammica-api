@@ -20,6 +20,5 @@ export interface Timetable {
   school: string;
   section: string;
   day: string;
-
   duration_of_one_period: string;
 }
