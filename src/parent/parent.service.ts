@@ -36,7 +36,7 @@ export class ParentService {
   }
 
   public async findChildren(id: string) {
-    var children = await this.studentModel.find({ parent: id });
+    var children = await this.studentModel.find({ parent: id }).populate('user').populate('section');
     return {
       response_code: HttpStatus.OK,
       response_data: children,

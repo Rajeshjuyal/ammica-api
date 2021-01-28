@@ -79,6 +79,7 @@ export class StudentService {
   }
 
   public async update(id: string, studentdata: Student) {
+    console.log(studentdata)
     var student = this.studentModel.findByIdAndUpdate(id, studentdata);
     return {
       response_code: HttpStatus.OK,
