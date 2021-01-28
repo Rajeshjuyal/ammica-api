@@ -6,6 +6,7 @@ import { StudentSchema } from './student.model';
 import { SectioSchema } from '../section/sectiom.model';
 import { UsersSchema } from '../users/users.model';
 import { PeriodSchema } from '../period/period.model';
+import { ParentSchema } from '../parent/parent.modle';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { PeriodSchema } from '../period/period.model';
       { name: 'Section', schema: SectioSchema },
       { name: 'User', schema: UsersSchema },
       { name: 'Period', schema: PeriodSchema },
+      { name: 'Parent', schema: ParentSchema },
     ]),
   ],
   controllers: [StudentController],

@@ -1,14 +1,14 @@
-import * as mongooose from 'mongoose';
-export const ParentSchema = new mongooose.Schema({
-  id: { type: String, required: true },
-  parent_name: { type: String, required: true },
-  child_name: { type: String, required: true },
-  email: { type: String, required: true },
+import * as mongoose from 'mongoose';
+export const ParentSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: 'true',
+  },
+  child_count: { type: Number, required: true },
 });
 
 export interface Parent {
-  id: 'string';
-  parent_name: 'string';
-  child_name: 'string';
-  email: 'string';
+  user: 'string';
+  child: 'number';
 }
