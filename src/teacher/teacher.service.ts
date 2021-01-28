@@ -10,6 +10,7 @@ export class TeacherService {
     @InjectModel('Teacher') private readonly teacherModel: Model<any>,
     @InjectModel('User') private readonly userModel: Model<any>,
     @InjectModel('School') private readonly schoolModel: Model<any>,
+    @InjectModel('Period') private readonly periodModel: Model<any>,
   ) {}
   public async create(data: Teacher) {
     var teacher1 = await this.teacherModel.create(data);
@@ -49,6 +50,29 @@ export class TeacherService {
       response_data: teacher6,
     };
   }
+
+  public async todayClasses(id: string, day: string) {
+    var teacher = await this.userModel.find({ _id: id });
+    var periods = await this.periodModel
+      .find({ teacher: id, Day: day })
+      .populate('subject');
+    return {
+      response_code: HttpStatus.OK,
+      response_data: periods,
+    };
+  }
+
+  public async timetable(id: string) {
+    var teacher = await this.userModel.find({ _id: id });
+    var periods = await this.periodModel
+      .find({ teacher: id })
+      .populate('subject');
+    return {
+      response_code: HttpStatus.OK,
+      response_data: periods,
+    };
+  }
+
 
   public async update(id: string, data: Teacher) {
     var teacher4 = await this.teacherModel.findByIdAndUpdate(id, data);
