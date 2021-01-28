@@ -19,7 +19,7 @@ export class StudentService {
     var student1 = await this.studentModel.create(student);
 
     return {
-      response_code: HttpStatus.OK,
+      response_code: HttpStatus.CREATED,
       response_data: student1,
     };
   }
@@ -40,7 +40,7 @@ export class StudentService {
     var periods = await this.periodModel
       .find({ section: student[0].section, Day: day })
       .populate('subject')
-      .populate({ path: 'user', select: 'firstName' });
+      .populate('user');
     return {
       response_code: HttpStatus.OK,
       response_data: periods,
