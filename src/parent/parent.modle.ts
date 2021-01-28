@@ -10,5 +10,5 @@ export const ParentSchema = new mongoose.Schema({
 
 export interface Parent {
   user: 'string';
-  child: 'number';
+  child_count: 'number';
 }
