@@ -54,7 +54,7 @@ export class TeacherService {
   public async todayClasses(id: string, day: string) {
     var teacher = await this.userModel.find({ _id: id });
     var periods = await this.periodModel
-      .find({ teacher: id, Day: day })
+      .find({ user: id, Day: day })
       .populate('subject');
     return {
       response_code: HttpStatus.OK,
@@ -65,7 +65,7 @@ export class TeacherService {
   public async timetable(id: string) {
     var teacher = await this.userModel.find({ _id: id });
     var periods = await this.periodModel
-      .find({ teacher: id })
+      .find({ user: id })
       .populate('subject');
     return {
       response_code: HttpStatus.OK,
