@@ -52,7 +52,8 @@ export class StudentService {
     var student = await this.studentModel.find({ user: user._id });
     var periods = await this.periodModel
       .find({ section: student[0].section })
-      .populate('subject');
+      .populate('subject')
+      .populate({path: 'teacher', select: 'firstName lastName', model: 'User'});
     return {
       response_code: HttpStatus.OK,
       response_data: periods,
