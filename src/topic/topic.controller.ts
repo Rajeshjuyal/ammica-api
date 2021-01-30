@@ -27,7 +27,7 @@ export class TopicController {
   findOne(@Param('id') id: string) {
     return this.topicService.findOne(id);
   }
-  @Get('bychapter./id')
+  @Get('bychapter/id')
   findbychapter(@Param('id') id: string) {
     return this.topicService.findchapter(id);
   }
