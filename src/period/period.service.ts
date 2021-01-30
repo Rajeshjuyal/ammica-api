@@ -56,7 +56,7 @@ export class PeriodService {
   }
 
   public async teacherPeriod(id: string) {
-    var periods = await this.periodModel.find({ user: id });
+    var periods = await this.periodModel.find({ teacher: id });
     return {
       response_code: HttpStatus.OK,
       response_data: periods,

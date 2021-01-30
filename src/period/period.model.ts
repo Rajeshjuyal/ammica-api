@@ -15,7 +15,7 @@ export const PeriodSchema = new mongoose.Schema({
     ref: 'Section',
     required: true,
   },
-  user: {
+  teacher: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
@@ -27,9 +27,11 @@ export const PeriodSchema = new mongoose.Schema({
   Day: { type: String, required: true },
 });
 export interface Period {
+  subject: string;
+  timetable: string;
+  section: string;
+  teacher: string;
   name: string;
-
   starttime: string;
-
   Day: string;
 }

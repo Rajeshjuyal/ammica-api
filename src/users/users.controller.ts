@@ -95,6 +95,27 @@ export class UsersController {
         return this.userService.validateUserCredentials(credentials);
     }
 
+    // sends request to validate user's credentials
+    @Post('parent/login')
+    public validateParent(@Body() credentials: CredentialsDTO): Promise<CommonResponseModel> {
+        console.log("Login called")
+        return this.userService.validateParentCredentials(credentials);
+    }
+
+    // sends request to validate user's credentials
+    @Post('student/login')
+    public validateStudent(@Body() credentials: CredentialsDTO): Promise<CommonResponseModel> {
+        console.log("Login called")
+        return this.userService.validateStudentCredentials(credentials);
+    }
+
+    // sends request to validate user's credentials
+    @Post('teacher/login')
+    public validateTeacher(@Body() credentials: CredentialsDTO): Promise<CommonResponseModel> {
+        console.log("Login called")
+        return this.userService.validateTeacherCredentials(credentials);
+    }
+
     //login with mobile Number
     @Post('/with/mobile')
     public async loginWithMobileNo(@Body() credentials: CredentialsMobileDTO): Promise<CommonResponseModel> {

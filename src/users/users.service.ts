@@ -246,6 +246,191 @@ export class UsersService {
         }
     }
 
+
+    // validates user's credential and sends token and id as response
+    public async validateParentCredentials(credentials: CredentialsDTO): Promise<CommonResponseModel> {
+        credentials.email=credentials.email.toLowerCase();
+        const userData: UsersDTO = await this.userModel.findOne({email: credentials.email});
+        console.log('CredentialplayerId-------------', credentials.playerId);
+        if (!userData) {
+            return {
+                response_code: HttpStatus.UNAUTHORIZED,
+                response_data: `User with email ${credentials.email} is not registered`,
+            };
+        }
+        else if(userData.role === 'Parent'){
+            const passwordMatch = await this.authService.verifyPassword(credentials.password, userData.password);
+            const body = {
+                token: null,
+                _id: null,
+                role: null
+            };
+            if (passwordMatch) {
+                if (passwordMatch && userData.emailVerified) {
+                    body._id = userData._id;
+                    body.token = await this.authService.generateAccessToken(userData._id);
+                    body.role = userData.role;
+                    const userInfo = await this.userModel.findOne({email: credentials.email});
+                    userInfo.playerId = credentials.playerId;
+                    console.log('payerId----------------', userInfo.playerId);
+                    const res = await this.userModel.findByIdAndUpdate(userInfo._id, userInfo);
+                    return {response_code: HttpStatus.OK, response_data: body};
+                } else {
+                    const verificationId = uuid();
+                    userData.verificationId = verificationId;
+                    const setVerificationId = await this.userModel.findByIdAndUpdate(userData._id, userData);
+                    const {body, subject, htmlData} = this.getEmailVerificationFields(verificationId);
+                    const emailRes = await this.utilService.sendEmail(userData.email, subject, body, htmlData);
+                    if (emailRes && emailRes.length > 0) {
+                        return {
+                            response_code: HttpStatus.UNAUTHORIZED,
+                            response_data:
+                                'Your account is not verified. A verification link is sent your email, Please verify your email',
+                        };
+                    } else {
+                        return {
+                            response_code: HttpStatus.UNAUTHORIZED,
+                            response_data: 'Could not send verification email',
+                        };
+                    }
+                }
+            } else {
+                return {
+                    response_code: HttpStatus.UNAUTHORIZED,
+                    response_data: 'Enter a valid password',
+                };
+            }
+        }else {
+            return {
+                response_code: HttpStatus.BAD_REQUEST,
+                response_data: 'Role Should be Parent'
+            };
+        }
+    }
+
+
+    // validates user's credential and sends token and id as response
+    public async validateStudentCredentials(credentials: CredentialsDTO): Promise<CommonResponseModel> {
+        credentials.email=credentials.email.toLowerCase();
+        const userData: UsersDTO = await this.userModel.findOne({email: credentials.email});
+        console.log('CredentialplayerId-------------', credentials.playerId);
+        if (!userData) {
+            return {
+                response_code: HttpStatus.UNAUTHORIZED,
+                response_data: `User with email ${credentials.email} is not registered`,
+            };
+        }
+        else if(userData.role === 'Student'){
+            const passwordMatch = await this.authService.verifyPassword(credentials.password, userData.password);
+            const body = {
+                token: null,
+                _id: null,
+                role: null
+            };
+            if (passwordMatch) {
+                if (passwordMatch && userData.emailVerified) {
+                    body._id = userData._id;
+                    body.token = await this.authService.generateAccessToken(userData._id);
+                    body.role = userData.role;
+                    const userInfo = await this.userModel.findOne({email: credentials.email});
+                    userInfo.playerId = credentials.playerId;
+                    console.log('payerId----------------', userInfo.playerId);
+                    const res = await this.userModel.findByIdAndUpdate(userInfo._id, userInfo);
+                    return {response_code: HttpStatus.OK, response_data: body};
+                } else {
+                    const verificationId = uuid();
+                    userData.verificationId = verificationId;
+                    const setVerificationId = await this.userModel.findByIdAndUpdate(userData._id, userData);
+                    const {body, subject, htmlData} = this.getEmailVerificationFields(verificationId);
+                    const emailRes = await this.utilService.sendEmail(userData.email, subject, body, htmlData);
+                    if (emailRes && emailRes.length > 0) {
+                        return {
+                            response_code: HttpStatus.UNAUTHORIZED,
+                            response_data:
+                                'Your account is not verified. A verification link is sent your email, Please verify your email',
+                        };
+                    } else {
+                        return {
+                            response_code: HttpStatus.UNAUTHORIZED,
+                            response_data: 'Could not send verification email',
+                        };
+                    }
+                }
+            } else {
+                return {
+                    response_code: HttpStatus.UNAUTHORIZED,
+                    response_data: 'Enter a valid password',
+                };
+            }
+        }else {
+            return {
+                response_code: HttpStatus.BAD_REQUEST,
+                response_data: 'Role Should be Student'
+            };
+        }
+    }
+
+    // validates user's credential and sends token and id as response
+    public async validateTeacherCredentials(credentials: CredentialsDTO): Promise<CommonResponseModel> {
+        credentials.email=credentials.email.toLowerCase();
+        const userData: UsersDTO = await this.userModel.findOne({email: credentials.email});
+        console.log('CredentialplayerId-------------', credentials.playerId);
+        if (!userData) {
+            return {
+                response_code: HttpStatus.UNAUTHORIZED,
+                response_data: `User with email ${credentials.email} is not registered`,
+            };
+        }
+        else if(userData.role === 'Teacher'){
+            const passwordMatch = await this.authService.verifyPassword(credentials.password, userData.password);
+            const body = {
+                token: null,
+                _id: null,
+                role: null
+            };
+            if (passwordMatch) {
+                if (passwordMatch && userData.emailVerified) {
+                    body._id = userData._id;
+                    body.token = await this.authService.generateAccessToken(userData._id);
+                    body.role = userData.role;
+                    const userInfo = await this.userModel.findOne({email: credentials.email});
+                    userInfo.playerId = credentials.playerId;
+                    console.log('payerId----------------', userInfo.playerId);
+                    const res = await this.userModel.findByIdAndUpdate(userInfo._id, userInfo);
+                    return {response_code: HttpStatus.OK, response_data: body};
+                } else {
+                    const verificationId = uuid();
+                    userData.verificationId = verificationId;
+                    const setVerificationId = await this.userModel.findByIdAndUpdate(userData._id, userData);
+                    const {body, subject, htmlData} = this.getEmailVerificationFields(verificationId);
+                    const emailRes = await this.utilService.sendEmail(userData.email, subject, body, htmlData);
+                    if (emailRes && emailRes.length > 0) {
+                        return {
+                            response_code: HttpStatus.UNAUTHORIZED,
+                            response_data:
+                                'Your account is not verified. A verification link is sent your email, Please verify your email',
+                        };
+                    } else {
+                        return {
+                            response_code: HttpStatus.UNAUTHORIZED,
+                            response_data: 'Could not send verification email',
+                        };
+                    }
+                }
+            } else {
+                return {
+                    response_code: HttpStatus.UNAUTHORIZED,
+                    response_data: 'Enter a valid password',
+                };
+            }
+        }else {
+            return {
+                response_code: HttpStatus.BAD_REQUEST,
+                response_data: 'Role Should be Teacher'
+            };
+        }
+    }
+
     //login with mobile number
     public async LoginWithMobileNumber(credentials: CredentialsMobileDTO): Promise<CommonResponseModel> {
         const userData: UsersDTO = await this.userModel.findOne({mobileNumber: credentials.mobileNumber});
