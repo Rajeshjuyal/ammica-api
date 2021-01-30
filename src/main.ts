@@ -21,7 +21,6 @@ import { AttendenceModule } from './attendence/attendence.module';
 import { TimetableModule } from './timetable/timetable.module';
 import { FeesModule } from './fees/fees.module';
 import { LibraryModule } from './library/library.module';
-import { SettingModule } from './setting/setting.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TopicModule } from './topic/topic.module';
 import { ChaptersModule } from './chapter/chapters.module';
@@ -34,6 +33,7 @@ import { TodayclassModule } from './todayclass/todayclass.module';
 import { PerformanceModule } from './performance/performance.module';
 import { ReportcardModule } from './reportcard/reportcard.module';
 import { ParentModule } from './parent/parent.module';
+import { SettingModule } from './setting/setting.module';
 const Cron = require('cron').CronJob;
 
 
@@ -85,7 +85,6 @@ async function bootstrap() {
             FeesModule,
             LibraryModule,
             SettingModule,
-        
             TopicModule,
         
             ChaptersModule,

@@ -24,6 +24,7 @@ const GeneralService = require('../utils/general-service');
 export class UsersService {
     constructor(
         @InjectModel('Users') private readonly userModel: Model<any>,
+        @InjectModel('Parent') private readonly parentModel: Model<any>,
         private jwtService: JwtService,
         private authService: AuthService,
         private utilService: UploadService,
@@ -277,16 +278,19 @@ export class UsersService {
         }
         else if(userData.role === 'Parent'){
             const passwordMatch = await this.authService.verifyPassword(credentials.password, userData.password);
+            const profileData = await this.parentModel.findOne({user: userData._id});
             const body = {
                 token: null,
                 _id: null,
-                role: null
+                role: null,
+                profileid:null
             };
             if (passwordMatch) {
                 if (passwordMatch && userData.emailVerified) {
                     body._id = userData._id;
                     body.token = await this.authService.generateAccessToken(userData._id);
                     body.role = userData.role;
+                    body.profileid = profileData._id;
                     const userInfo = await this.userModel.findOne({email: credentials.email});
                     userInfo.playerId = credentials.playerId;
                     console.log('payerId----------------', userInfo.playerId);

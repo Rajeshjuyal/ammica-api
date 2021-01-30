@@ -9,10 +9,11 @@ import { JwtStrategy } from '../utils/jwt.strategy';
 import { globalConfig } from '../utils/app-service-data';
 import { AuthService } from '../utils/auth.service';
 import { UploadService } from '../upload/upload.service';
+import { ParentSchema } from '../parent/parent.modle';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Users', schema: UsersSchema }]),
+    MongooseModule.forFeature([{ name: 'Users', schema: UsersSchema },{ name: 'Parent', schema: ParentSchema }]),
     JwtModule.register({
       secret: globalConfig.secret,
       signOptions: {
