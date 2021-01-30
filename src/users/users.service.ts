@@ -48,6 +48,23 @@ export class UsersService {
         }
     }
 
+    // get's user information
+    public async getDeveUserInformation(id: string): Promise<CommonResponseModel> {
+        console.log("id",id);
+        const userInfo = await this.userModel.findById(id, '-password -salt');
+        if (userInfo) {
+            return {
+                response_code: HttpStatus.OK,
+                response_data: userInfo
+            };
+        } else {
+            return {
+                response_code: HttpStatus.UNAUTHORIZED,
+                response_data: 'User not found',
+            };
+        }
+    }
+
     // get's admin settings
     public async getAdminSettings(): Promise<CommonResponseModel> {
         const settings = await this.userModel.findOne({role: 'Admin'});
@@ -247,7 +264,7 @@ export class UsersService {
     }
 
 
-    // validates user's credential and sends token and id as response
+    // validates parent's credential and sends token and id as response
     public async validateParentCredentials(credentials: CredentialsDTO): Promise<CommonResponseModel> {
         credentials.email=credentials.email.toLowerCase();
         const userData: UsersDTO = await this.userModel.findOne({email: credentials.email});
@@ -309,7 +326,7 @@ export class UsersService {
     }
 
 
-    // validates user's credential and sends token and id as response
+    // validates student's credential and sends token and id as response
     public async validateStudentCredentials(credentials: CredentialsDTO): Promise<CommonResponseModel> {
         credentials.email=credentials.email.toLowerCase();
         const userData: UsersDTO = await this.userModel.findOne({email: credentials.email});
@@ -370,7 +387,7 @@ export class UsersService {
         }
     }
 
-    // validates user's credential and sends token and id as response
+    // validates teacher's credential and sends token and id as response
     public async validateTeacherCredentials(credentials: CredentialsDTO): Promise<CommonResponseModel> {
         credentials.email=credentials.email.toLowerCase();
         const userData: UsersDTO = await this.userModel.findOne({email: credentials.email});
@@ -588,8 +605,6 @@ export class UsersService {
             response_data: 'Password has been reset successfully',
         };
     }
-
-    // returns user'sdistance from shop
     
 
     // checks whether the token is valid or not

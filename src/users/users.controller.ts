@@ -45,6 +45,10 @@ export class UsersController {
         return this.userService.getUserInformation(user._id);
     }
 
+    @Get('/:id')
+    public getDevUserInformation(@Param('id') id: string): Promise<CommonResponseModel> {
+        return this.userService.getDeveUserInformation(id);
+    }
   
 
     // sends request to get list of users

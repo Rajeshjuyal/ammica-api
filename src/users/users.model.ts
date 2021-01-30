@@ -81,18 +81,6 @@ export const UsersSchema = new mongoose.Schema(
         type: [Number],
       },
     },
-    freeDeliveryDistance: {
-      type: Number,
-    },
-    deliveryCharge: {
-      type: Number,
-    },
-    deliveryDistanceUnit: {
-      type: String,
-    },
-    tax: {
-      type: Number,
-    },
     fcmToken: {
       type: String,
     },
@@ -103,14 +91,6 @@ export const UsersSchema = new mongoose.Schema(
     // only for admin
     exportedFile: {
       type: Object,
-    },
-    //newly added field loyaltyPoint and totalLoyaltyPoints
-    loyaltyPoints:{
-      type:Array
-    },
-    //current loyalty point
-    totalLoyaltyPoints: {
-      type: Number
     },
 
   },
@@ -168,7 +148,7 @@ export class UsersDTO {
   playerId:String
 
   @IsNotEmpty()
-  @IsEnum(RoleType, {message: 'Role  type should be User or Admin or DeliveryBoy'})
+  @IsEnum(RoleType, {message: 'Role  type should be User or Admin or Parent or Student'})
   @ApiModelProperty()
   role: string;
 
@@ -197,31 +177,8 @@ export class UsersDTO {
   @IsOptional()
   verificationId: string;
 
-  @IsOptional()
-  @IsNumber()
-  @IsPositive()
- 
-  @ApiModelProperty()
-  freeDeliveryDistance: number;
-
-  @IsOptional()
-  @IsNumber()
-  @IsPositive()
-  
-  @ApiModelProperty()
-  deliveryCharge: number;
-
-  @IsOptional()
-  @ApiModelProperty()
-  deliveryDistanceUnit: string;
-
   fcmToken: string;
   status:boolean
-  @IsOptional()
-  @ApiModelProperty()
-  loyaltyPoints:Array<any>= []
-  @ApiModelProperty()
-  totalLoyaltyPoints:number;
 }
 
 export class UsersUpdateDTO {
@@ -269,27 +226,6 @@ export class UsersUpdateDTO {
 
   @IsOptional()
   verificationId: string;
-
-  @IsOptional()
-  @IsNumber()
-  @IsPositive()
-  @ApiModelProperty()
-  freeDeliveryDistance: number;
-
-  @IsOptional()
-  @IsNumber()
-  @IsPositive()
-  @ApiModelProperty()
-  deliveryCharge: number;
-
-  @IsOptional()
-  @ApiModelProperty()
-  deliveryDistanceUnit: string;
-
-  @IsOptional()
-  @IsNumber()
-  @ApiModelProperty()
-  tax: number;
 
   @IsOptional()
   @ApiModelProperty()
