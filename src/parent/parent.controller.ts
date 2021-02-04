@@ -29,6 +29,11 @@ export class ParentController {
     return this.parentService.findOne(id);
   }
 
+  @Get('wards/:id')
+  findChild(@Param('id') id: string) {
+    return this.parentService.findChildren(id);
+  }
+
   @Put(':id')
   update(@Param('id') id: string, @Body() parentdata: Parent) {
     return this.parentService.update(id, parentdata);

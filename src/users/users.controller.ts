@@ -45,6 +45,10 @@ export class UsersController {
         return this.userService.getUserInformation(user._id);
     }
 
+    @Get('/:id')
+    public getDevUserInformation(@Param('id') id: string): Promise<CommonResponseModel> {
+        return this.userService.getDeveUserInformation(id);
+    }
   
 
     // sends request to get list of users
@@ -93,6 +97,27 @@ export class UsersController {
     public validateUser(@Body() credentials: CredentialsDTO): Promise<CommonResponseModel> {
         console.log("Login called")
         return this.userService.validateUserCredentials(credentials);
+    }
+
+    // sends request to validate user's credentials
+    @Post('parent/login')
+    public validateParent(@Body() credentials: CredentialsDTO): Promise<CommonResponseModel> {
+        console.log("Login called")
+        return this.userService.validateParentCredentials(credentials);
+    }
+
+    // sends request to validate user's credentials
+    @Post('student/login')
+    public validateStudent(@Body() credentials: CredentialsDTO): Promise<CommonResponseModel> {
+        console.log("Login called")
+        return this.userService.validateStudentCredentials(credentials);
+    }
+
+    // sends request to validate user's credentials
+    @Post('teacher/login')
+    public validateTeacher(@Body() credentials: CredentialsDTO): Promise<CommonResponseModel> {
+        console.log("Login called")
+        return this.userService.validateTeacherCredentials(credentials);
     }
 
     //login with mobile Number

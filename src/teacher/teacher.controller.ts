@@ -37,6 +37,16 @@ export class TeacherController {
     return this.teacherService.findSchool(id);
   }
 
+  @Get('todayclasses/:day/:id')
+  todayclasses(@Param('id') id: string, @Param('day') day: string) {
+    return this.teacherService.todayClasses(id, day);
+  }
+
+  @Get('timetable/:id')
+  timeTable(@Param('id') id: string) {
+    return this.teacherService.timetable(id);
+  }
+
   @Put(':id')
   update(@Param('id') id: string, @Body() data: Teacher) {
     return this.teacherService.update(id, data);

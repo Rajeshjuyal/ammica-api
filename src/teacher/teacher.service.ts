@@ -57,19 +57,44 @@ export class TeacherService {
     };
   }
 
-  public async update(id: string, data: Teacher) {
-    var teacher4 = await this.teacherModel.findByIdAndUpdate(id, data);
+  public async todayClasses(id: string, day: string) {
+    var teacher = await this.userModel.find({ _id: id });
+    var periods = await this.periodModel
+      .find({ teacher: id, Day: day })
+      .populate('subject')
+      .populate({path:'section', model:'Section', populate: {path:'class', model:'Class'}});
     return {
       response_code: HttpStatus.OK,
-      response_data: teacher4,
+      response_data: periods,
+    };
+  }
+
+  public async timetable(id: string) {
+    var teacher = await this.userModel.find({ _id: id });
+    var periods = await this.periodModel
+      .find({ teacher: id })
+      .populate('subject')
+      .populate({path:'section', model:'Section', populate: {path:'class', model:'Class'}});
+    return {
+      response_code: HttpStatus.OK,
+      response_data: periods,
+    };
+  }
+
+
+  public async update(id: string, data: Teacher) {
+    var teacher = await this.teacherModel.findByIdAndUpdate(id, data);
+    return {
+      response_code: HttpStatus.OK,
+      response_data: teacher,
     };
   }
 
   public async remove(id: string) {
-    var teacher4 = await this.teacherModel.findByIdAndDelete(id);
+    var teacher = await this.teacherModel.findByIdAndDelete(id);
     return {
       response_code: HttpStatus.OK,
-      response_data: teacher4,
+      response_data: teacher,
     };
   }
 }

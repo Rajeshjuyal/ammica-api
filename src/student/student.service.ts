@@ -19,7 +19,7 @@ export class StudentService {
     var student1 = await this.studentModel.create(student);
 
     return {
-      response_code: HttpStatus.OK,
+      response_code: HttpStatus.CREATED,
       response_data: student1,
     };
   }
@@ -40,7 +40,7 @@ export class StudentService {
     var periods = await this.periodModel
       .find({ section: student[0].section, Day: day })
       .populate('subject')
-      .populate({ path: 'user', select: 'firstName' });
+      .populate({path: 'teacher', select: 'firstName lastName', model: 'User'});
     return {
       response_code: HttpStatus.OK,
       response_data: periods,
@@ -52,7 +52,8 @@ export class StudentService {
     var student = await this.studentModel.find({ user: user._id });
     var periods = await this.periodModel
       .find({ section: student[0].section })
-      .populate('subject');
+      .populate('subject')
+      .populate({path: 'teacher', select: 'firstName lastName', model: 'User'});
     return {
       response_code: HttpStatus.OK,
       response_data: periods,
@@ -79,6 +80,7 @@ export class StudentService {
   }
 
   public async update(id: string, studentdata: Student) {
+    console.log(studentdata)
     var student = this.studentModel.findByIdAndUpdate(id, studentdata);
     return {
       response_code: HttpStatus.OK,

@@ -8,6 +8,11 @@ export const StudentSchema = new mongoose.Schema({
     ref: 'User',
     required: 'true',
   },
+  parent: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Parent',
+    required: 'true',
+  },
   section: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Section',
@@ -26,6 +31,7 @@ export const StudentSchema = new mongoose.Schema({
 
 export interface Student {
   user: string;
+  parent: string;
   section: string;
   id: string;
   Registration: string;

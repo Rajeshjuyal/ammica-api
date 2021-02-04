@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, HttpStatus } from '@nestjs/common';
 import { Subject } from './subject.model';
 
 import { Model } from 'mongoose';
@@ -12,31 +12,45 @@ export class SubjectService {
     @InjectModel('Subject') private readonly subjectModel: Model<any>,
   ) {}
 
-  public async create(subject: Subject) {
-    var subject1 = await this.subjectModel.create(subject);
-    console.log(subject1);
-    return subject1;
+  public async create(subjectdata: Subject) {
+    var subject = await this.subjectModel.create(subjectdata);
+    console.log(subject);
+    return {
+      response_code: HttpStatus.OK,
+      response_data: subject,
+    };
   }
 
   public async findAll() {
     var subjects = await this.subjectModel.find();
-    return [...subjects];
+    return {
+      response_code: HttpStatus.OK,
+      response_data: subjects,
+    };
   }
 
   public async findOne(id: string) {
     var subject = await this.subjectModel.findById(id);
-
-    return subject;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: subject,
+    };
   }
 
   public async update(id: string, subjectdata: Subject) {
     var subject = await this.subjectModel.findByIdAndUpdate(id, subjectdata);
-    return subject;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: "Subject Updated ",
+    };
   }
 
   public async remove(id: string) {
     var subject = await this.subjectModel.findByIdAndDelete(id);
     subject.remove();
-    return subject;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: "Subject Deleted ",
+    };
   }
 }
