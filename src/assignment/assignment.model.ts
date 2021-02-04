@@ -5,15 +5,12 @@ export const AssignmentSchema = new mongoose.Schema({
     ref: 'Teacher',
     required: 'true',
   },
-  studentid: { type: String, required: true },
-  teacherid: { type: String, required: true },
+  class: { type: mongoose.Schema.Types.ObjectId, ref: 'class', required: true },
   marks: { type: String, required: true },
-  
 });
 
 export interface Assignment {
   teacher: string;
-  studentid: string;
-  teacherid: number;
+  class: string;
   marks: string;
 }

@@ -33,7 +33,10 @@ export class AssignemntController {
   findbySchool(@Param('id') id: string) {
     return this.assignmentService.findSchool(id);
   }
-
+  @Get('byclass/:id')
+  findbyClass(@Param('id') id: string) {
+    return this.assignmentService.findClass(id);
+  }
   @Put(':id')
   update(@Param('id') id: string, @Body() assignmentdata: Assignment) {
     return this.assignmentService.update(id, assignmentdata);
