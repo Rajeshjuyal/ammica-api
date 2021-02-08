@@ -34,6 +34,7 @@ import { PerformanceModule } from './performance/performance.module';
 import { ReportcardModule } from './reportcard/reportcard.module';
 import { ParentModule } from './parent/parent.module';
 import { SettingModule } from './setting/setting.module';
+import { BusinessModule } from './business/business.module';
 const Cron = require('cron').CronJob;
 
 
@@ -86,7 +87,7 @@ async function bootstrap() {
             LibraryModule,
             SettingModule,
             TopicModule,
-        
+            BusinessModule,
             ChaptersModule,
         
             UnitModule,

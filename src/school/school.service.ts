@@ -12,14 +12,20 @@ export class SchoolService {
   ) {}
 
   public async create(schooldata: School) {
-    var school1 = await this.schoolModel.create(schooldata);
-    console.log(school1);
-    return school1;
+    var school = await this.schoolModel.create(schooldata);
+    console.log(school);
+    return {
+      response_code: HttpStatus.OK,
+      response_data: school,
+    };
   }
 
   public async findAll() {
-    var schools = await this.schoolModel.find();
-    return [...schools];
+    var schools = await this.schoolModel.find().populate('user');
+    return {
+      response_code: HttpStatus.OK,
+      response_data: schools,
+    };
   }
 
   public async findOne(id: string) {
@@ -35,13 +41,19 @@ export class SchoolService {
   }
 
   public async update(id: string, schooldata: School) {
-    var schools = await this.schoolModel.findByIdAndUpdate(id, schooldata);
-    return schools;
+    var school = await this.schoolModel.findByIdAndUpdate(id, schooldata);
+    return {
+      response_code: HttpStatus.OK,
+      response_data: school,
+    };
   }
 
   public async remove(id: string) {
     var schools = await this.schoolModel.findByIdAndDelete(id);
     schools.remove;
-    return schools;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: "School Removed",
+    };
   }
 }

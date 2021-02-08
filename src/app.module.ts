@@ -36,6 +36,7 @@ import { QuestionModule } from './question/question.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { SectionModule } from './section/section.module';
 import { PeriodModule } from './period/period.module';
+import { BusinessModule } from './business/business.module';
 
 
 @Global()
@@ -57,6 +58,7 @@ import { PeriodModule } from './period/period.module';
         SeedModule,
         SequenceModule,
         AttendenceModule,
+        BusinessModule,
         TeacherModule,
         SubjectModule,
         StudentModule,
