@@ -1,10 +1,10 @@
-import {Global, HttpModule, Module} from '@nestjs/common';
-import {UsersModule} from './users/users.module';
-import {UploadModule} from './upload/upload.module';
-import {AppController} from './app.controller';
-import {ScheduleModule} from 'nest-schedule';
-import {BannerModule} from './Banner/banner.module';
-import {AppGateway} from './app.gateway';
+import { Global, HttpModule, Module } from '@nestjs/common';
+import { UsersModule } from './users/users.module';
+import { UploadModule } from './upload/upload.module';
+import { AppController } from './app.controller';
+import { ScheduleModule } from 'nest-schedule';
+import { BannerModule } from './Banner/banner.module';
+import { AppGateway } from './app.gateway';
 import { SeedModule } from './seed/seed.module';
 import { SequenceModule } from './sequence/sequence.module';
 import { TeacherModule } from './teacher/teacher.module';
@@ -38,58 +38,61 @@ import { SectionModule } from './section/section.module';
 import { PeriodModule } from './period/period.module';
 import { PayModule } from './pay/pay.module';
 import { CatogeryModule } from './catogery/catogery.module';
-
+import { BusinessModule } from './business/business.module';
 
 @Global()
 @Module({
-    imports: [
-        MongooseModule.forRootAsync({
-            useFactory: () => ({
-                uri: (process.env.NODE_ENV == 'production')?process.env.MONGO_DB_PRODUCTION_URL:process.env.MONGO_DB_TESTING_URL,
-                useNewUrlParser: true,
-                useFindAndModify: false,
-                useUnifiedTopology: true
-            }),
-        }),
-        UsersModule,
-        NotificationsModule,
-        UploadModule,
-        ScheduleModule.register(),
-        BannerModule,
-        SeedModule,
-        SequenceModule,
-        AttendenceModule,
-        TeacherModule,
-        SubjectModule,
-        StudentModule,
-        CourseModule,
-        CollageModule,
-        ScoreModule,
-        TimetableModule,
-        FeesModule,
-        LibraryModule,
-        SettingModule,
-        TopicModule,
-        ChaptersModule,
-        UnitModule,
-        SyllabusModule,
-        TestsModule,
-        AssignemntModule,
-        ClassModule,
-        TodayclassModule,
-        PerformanceModule,
-        ReportcardModule,
-        ParentModule,
-        SchoolModule,
-        QuestionModule,
-        SectionModule,
-        PeriodModule,
-        PayModule,
-        CatogeryModule
-    ],
-    controllers: [AppController],
-    providers: [AppGateway],
-    exports: [AppGateway]
+  imports: [
+    MongooseModule.forRootAsync({
+      useFactory: () => ({
+        uri:
+          process.env.NODE_ENV == 'production'
+            ? process.env.MONGO_DB_PRODUCTION_URL
+            : process.env.MONGO_DB_TESTING_URL,
+        useNewUrlParser: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true,
+      }),
+    }),
+    UsersModule,
+    NotificationsModule,
+    UploadModule,
+    ScheduleModule.register(),
+    BannerModule,
+    BusinessModule,
+    SeedModule,
+    SequenceModule,
+    AttendenceModule,
+    TeacherModule,
+    SubjectModule,
+    StudentModule,
+    CourseModule,
+    CollageModule,
+    ScoreModule,
+    TimetableModule,
+    FeesModule,
+    LibraryModule,
+    SettingModule,
+    TopicModule,
+    ChaptersModule,
+    UnitModule,
+    SyllabusModule,
+    TestsModule,
+    AssignemntModule,
+    ClassModule,
+    TodayclassModule,
+    PerformanceModule,
+    ReportcardModule,
+    ParentModule,
+    SchoolModule,
+    QuestionModule,
+    SectionModule,
+    PeriodModule,
+    PayModule,
+    CatogeryModule,
+  ],
+  controllers: [AppController],
+  providers: [AppGateway],
+  exports: [AppGateway],
 })
-export class AppModule {
-}
+export class AppModule {}
