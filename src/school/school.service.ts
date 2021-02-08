@@ -14,17 +14,26 @@ export class SchoolService {
   public async create(schooldata: School) {
     var school1 = await this.schoolModel.create(schooldata);
     console.log(school1);
-    return school1;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: school1,
+    };
   }
 
   public async findAll() {
     var schools = await this.schoolModel.find().populate('user');
-    return [...schools];
+    return {
+      response_code: HttpStatus.OK,
+      response_data: schools,
+    };
   }
 
   public async findOne(id: string) {
     var schools = await this.schoolModel.findById(id);
-    return schools;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: schools,
+    };
   }
   public async findUser(id: string) {
     var school = await this.userModel.find({ user: id });
@@ -36,7 +45,10 @@ export class SchoolService {
 
   public async update(id: string, schooldata: School) {
     var schools = await this.schoolModel.findByIdAndUpdate(id, schooldata);
-    return schools;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: schools,
+    };
   }
 
   public async remove(id: string) {
