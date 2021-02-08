@@ -8,6 +8,7 @@ export class AssignemntService {
   assignments: Assignment[] = [];
   constructor(
     @InjectModel('Assignment') private readonly assignmentModel: Model<any>,
+    @InjectModel('Class') private readonly classModel: Model<any>,
   ) {}
   public async create(assignment: Assignment) {
     var assignment1 = await this.assignmentModel.create(assignment);
@@ -34,6 +35,13 @@ export class AssignemntService {
   }
   public async findSchool(id: string) {
     var assignment = await this.assignmentModel.find({ school: id });
+    return {
+      response_code: HttpStatus,
+      response_data: assignment,
+    };
+  }
+  public async findClass(id: string) {
+    var assignment = await this.assignmentModel.find({ class: id });
     return {
       response_code: HttpStatus,
       response_data: assignment,

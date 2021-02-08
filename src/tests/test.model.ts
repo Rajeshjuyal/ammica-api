@@ -5,11 +5,10 @@ export const TestSchema = new mongoose.Schema({
     ref: 'User',
     required: 'true',
   },
-  
-  
+  name: { type: String, required: true },
 });
 
 export interface Test {
   user: string;
-  
+  name: string;
 }

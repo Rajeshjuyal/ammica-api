@@ -2,6 +2,7 @@ import { Injectable, HttpStatus } from '@nestjs/common';
 import { Teacher } from './teacher.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { Service } from 'aws-sdk';
 
 @Injectable()
 export class TeacherService {
@@ -27,6 +28,11 @@ export class TeacherService {
       response_code: HttpStatus.OK,
       response_data: teacher2,
     };
+  }
+  public async TodayClasses(id: string, day: string) {
+    var user = await this.userModel.findById(id);
+    var teacher = await this.teacherModel.find({ user: user.id });
+    var periods=await this.periodModel.find(Service)
   }
 
   public async findOne(id: string) {
