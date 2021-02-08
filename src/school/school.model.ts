@@ -21,12 +21,11 @@ export const SchoolSchema = new mongoose.Schema({
 });
 export interface School {
   user: string;
-  _id: string;
+  name: string;
   logo: string;
-  imageUrl:string
+  imageUrl: string;
   imageId: string;
   filepath: string;
-  name: string;
   location: string;
   board: string;
   totalstudent: string;

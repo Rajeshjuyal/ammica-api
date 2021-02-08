@@ -38,7 +38,7 @@ export class QuestionService {
   public async findtest(id: string) {
     var questions = await this.questionModel.find({ test: id });
     return {
-      response_code: HttpStatus,
+      response_code: HttpStatus.OK,
       response_data: questions,
     };
   }
