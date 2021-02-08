@@ -924,7 +924,7 @@ export class UsersService {
     } else {
       return {
         response_code: HttpStatus.UNAUTHORIZED,
-        response_data: 0,
+        response_data: { parentCount: 0 },
       };
     }
   }
