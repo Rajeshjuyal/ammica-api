@@ -839,6 +839,24 @@ export class UsersService {
     };
   }
 
+  // get's user information
+  public async getAdminCount(): Promise<CommonResponseModel> {
+    const adminCount = await this.userModel
+      .find({ role: 'Admin' })
+      .countDocuments();
+    if (adminCount) {
+      return {
+        response_code: HttpStatus.OK,
+        response_data: { adminCount },
+      };
+    } else {
+      return {
+        response_code: HttpStatus.UNAUTHORIZED,
+        response_data: 0,
+      };
+    }
+  }
+
   //Get all users List
   public async getAllteacherList(): Promise<CommonResponseModel> {
     const resdata = await this.userModel.find({ role: 'Teacher' });

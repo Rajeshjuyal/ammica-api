@@ -235,6 +235,14 @@ export class UsersController {
   //get All usera list
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth()
+  @Get('all/admin/count')
+  public getAllAdminCount(): Promise<CommonResponseModel> {
+    return this.userService.getAdminCount();
+  }
+
+  //get All usera list
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @Get('all/school/list')
   public getAllSchoolList(): Promise<CommonResponseModel> {
     return this.userService.getAllschoolList();
