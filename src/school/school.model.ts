@@ -17,7 +17,6 @@ export const SchoolSchema = new mongoose.Schema({
   location: { type: String, required: true },
   board: { type: String, required: true },
   totalstudent: { type: String, required: true },
-  contact_no: { type: String, required: true },
 });
 export interface School {
   user: string;
@@ -29,5 +28,4 @@ export interface School {
   location: string;
   board: string;
   totalstudent: string;
-  contact_no: string;
 }
