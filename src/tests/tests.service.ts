@@ -14,6 +14,7 @@ export class TestsService {
   ) {}
 
   public async create(tests: Test) {
+    console.log(tests);
     var test1 = await this.testModel.create(tests);
 
     return {
