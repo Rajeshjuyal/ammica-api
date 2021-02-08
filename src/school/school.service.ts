@@ -44,10 +44,10 @@ export class SchoolService {
   }
 
   public async update(id: string, schooldata: School) {
-    var schools = await this.schoolModel.findByIdAndUpdate(id, schooldata);
+    var heads = await this.schoolModel.findByIdAndUpdate(id, schooldata);
     return {
       response_code: HttpStatus.OK,
-      response_data: schools,
+      response_data:heads,
     };
   }
 
