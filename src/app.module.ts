@@ -37,6 +37,7 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { SectionModule } from './section/section.module';
 import { PeriodModule } from './period/period.module';
 import { PayModule } from './pay/pay.module';
+import { CatogeryModule } from './catogery/catogery.module';
 
 
 @Global()
@@ -83,7 +84,8 @@ import { PayModule } from './pay/pay.module';
         QuestionModule,
         SectionModule,
         PeriodModule,
-        PayModule
+        PayModule,
+        CatogeryModule
     ],
     controllers: [AppController],
     providers: [AppGateway],
