@@ -36,12 +36,9 @@ import { QuestionModule } from './question/question.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { SectionModule } from './section/section.module';
 import { PeriodModule } from './period/period.module';
-<<<<<<< HEAD
 import { BusinessModule } from './business/business.module';
-=======
 import { PayModule } from './pay/pay.module';
 import { CatogeryModule } from './catogery/catogery.module';
->>>>>>> dfba85d4ac4401fd982c43d68961dd39d9c8d63b
 
 
 @Global()
