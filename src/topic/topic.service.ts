@@ -9,6 +9,7 @@ export class TopicService {
   constructor(
     @InjectModel('Topic') private readonly topicModel: Model<any>,
     @InjectModel('Chapter') private readonly chapterModel: Model<any>,
+    @InjectModel('Catogery') private readonly catogeryModel: Model<any>,
   ) {}
 
   public async create(topicdata: Topic) {
@@ -41,6 +42,13 @@ export class TopicService {
       response_data: topics,
     };
   }
+  public async findcatogery(id: string) {
+    var catogery = await this.topicModel.find({ catogery: id });
+    return {
+      response_code: HttpStatus.OK,
+      response_data: catogery,
+    };
+  }
 
   public async update(id: string, topicdata: Topic) {
     var topic = await this.topicModel.findByIdAndUpdate(id, topicdata);
@@ -55,7 +63,7 @@ export class TopicService {
     topics.remove();
     return {
       response_code: HttpStatus.OK,
-      response_data: "Topic Deleted",
+      response_data: 'Topic Deleted',
     };
   }
 }

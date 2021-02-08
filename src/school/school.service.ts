@@ -18,7 +18,7 @@ export class SchoolService {
   }
 
   public async findAll() {
-    var schools = await this.schoolModel.find();
+    var schools = await this.schoolModel.find().populate('user');
     return [...schools];
   }
 
