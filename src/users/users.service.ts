@@ -839,6 +839,96 @@ export class UsersService {
     };
   }
 
+  // get's admin count
+  public async getstudentCount(): Promise<CommonResponseModel> {
+    const studentCount = await this.userModel
+      .find({ role: 'Student' })
+      .countDocuments();
+    if (studentCount) {
+      return {
+        response_code: HttpStatus.OK,
+        response_data: { studentCount },
+      };
+    } else {
+      return {
+        response_code: HttpStatus.UNAUTHORIZED,
+        response_data: 0,
+      };
+    }
+  }
+
+  // get's admin count
+  public async getSchoolCount(): Promise<CommonResponseModel> {
+    const schoolCount = await this.userModel
+      .find({ role: 'School' })
+      .countDocuments();
+    if (schoolCount) {
+      return {
+        response_code: HttpStatus.OK,
+        response_data: { schoolCount },
+      };
+    } else {
+      return {
+        response_code: HttpStatus.UNAUTHORIZED,
+        response_data: 0,
+      };
+    }
+  }
+
+  // get's admin count
+  public async getTeacherCount(): Promise<CommonResponseModel> {
+    const teacherCount = await this.userModel
+      .find({ role: 'Teacher' })
+      .countDocuments();
+    if (teacherCount) {
+      return {
+        response_code: HttpStatus.OK,
+        response_data: { teacherCount },
+      };
+    } else {
+      return {
+        response_code: HttpStatus.UNAUTHORIZED,
+        response_data: 0,
+      };
+    }
+  }
+
+  // get's admin count
+  public async getAdminCount(): Promise<CommonResponseModel> {
+    const adminCount = await this.userModel
+      .find({ role: 'Admin' })
+      .countDocuments();
+    if (adminCount) {
+      return {
+        response_code: HttpStatus.OK,
+        response_data: { adminCount },
+      };
+    } else {
+      return {
+        response_code: HttpStatus.UNAUTHORIZED,
+        response_data: 0,
+      };
+    }
+  }
+
+  // get's admin count
+  public async getParentCount(): Promise<CommonResponseModel> {
+    const parentCount = await this.userModel
+      .find({ role: 'Parent' })
+      .countDocuments();
+    if (parentCount) {
+      return {
+        response_code: HttpStatus.OK,
+        response_data: { parentCount },
+      };
+    } else {
+      return {
+        response_code: HttpStatus.UNAUTHORIZED,
+        response_data: { parentCount: 0 },
+      };
+    }
+  }
+
   //Get all users List
   public async getAllteacherList(): Promise<CommonResponseModel> {
     const resdata = await this.userModel.find({ role: 'Teacher' });

@@ -235,6 +235,42 @@ export class UsersController {
   //get All usera list
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth()
+  @Get('all/admin/count')
+  public getAllAdminCount(): Promise<CommonResponseModel> {
+    return this.userService.getAdminCount();
+  }
+  //get All usera list
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @Get('all/school/count')
+  public getAllSchoolCount(): Promise<CommonResponseModel> {
+    return this.userService.getSchoolCount();
+  }
+  //get All usera list
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @Get('all/teacher/count')
+  public getAllTeacherCount(): Promise<CommonResponseModel> {
+    return this.userService.getTeacherCount();
+  }
+  //get All usera list
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @Get('all/student/count')
+  public getAllStudentCount(): Promise<CommonResponseModel> {
+    return this.userService.getstudentCount();
+  }
+  //get All usera list
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @Get('all/parent/count')
+  public getAllParentCount(): Promise<CommonResponseModel> {
+    return this.userService.getParentCount();
+  }
+
+  //get All usera list
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
   @Get('all/school/list')
   public getAllSchoolList(): Promise<CommonResponseModel> {
     return this.userService.getAllschoolList();

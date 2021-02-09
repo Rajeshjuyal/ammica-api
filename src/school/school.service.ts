@@ -17,6 +17,7 @@ export class SchoolService {
     return {
       response_code: HttpStatus.OK,
       response_data: school,
+
     };
   }
 
@@ -30,7 +31,10 @@ export class SchoolService {
 
   public async findOne(id: string) {
     var schools = await this.schoolModel.findById(id);
-    return schools;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: schools,
+    };
   }
   public async findUser(id: string) {
     var school = await this.userModel.find({ user: id });

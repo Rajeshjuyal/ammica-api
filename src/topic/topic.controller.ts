@@ -31,6 +31,10 @@ export class TopicController {
   findbychapter(@Param('id') id: string) {
     return this.topicService.findchapter(id);
   }
+  @Get('bycatogery/:id')
+  findbycatogery(@Param('id') id: string) {
+    return this.topicService.findcatogery(id);
+  }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() topicdata: Topic) {
