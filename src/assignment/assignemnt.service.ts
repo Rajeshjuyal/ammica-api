@@ -21,7 +21,7 @@ export class AssignemntService {
   public async findAll() {
     var assignmentss = await this.assignmentModel.find();
     return {
-      response_code: HttpStatus,
+      response_code: HttpStatus.OK,
       response_data: assignmentss,
     };
   }
@@ -29,21 +29,21 @@ export class AssignemntService {
   public async findOne(id: string) {
     var assignments = await this.assignmentModel.findById(id);
     return {
-      response_code: HttpStatus,
+      response_code: HttpStatus.OK,
       response_data: assignments,
     };
   }
   public async findSchool(id: string) {
     var assignment = await this.assignmentModel.find({ school: id });
     return {
-      response_code: HttpStatus,
+      response_code: HttpStatus.OK,
       response_data: assignment,
     };
   }
   public async findClass(id: string) {
     var assignment = await this.assignmentModel.find({ class: id });
     return {
-      response_code: HttpStatus,
+      response_code: HttpStatus.OK,
       response_data: assignment,
     };
   }
@@ -54,7 +54,7 @@ export class AssignemntService {
       assignmentdata,
     );
     return {
-      response_code: HttpStatus,
+      response_code: HttpStatus.OK,
       response_data: assignments,
     };
   }
