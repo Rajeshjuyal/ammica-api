@@ -29,7 +29,7 @@ export class BusinessController {
         return this.businessService.getBusinessinfomation(user);
     }
 
-    //update business data
+    // update business data
     // @Put('/update/:imageId')
     // public updateBusinessData(@GetUser() user: UsersDTO, @Param('imageId') imageId: string, @Body() businesData: BusinessDTO): Promise<CommonResponseModel> {
     //     return this.businessService.updateBusinessData(user, imageId, businesData);
@@ -38,7 +38,7 @@ export class BusinessController {
     // public deleteBusinessData(@GetUser() user: UsersDTO, @Param('imageId') imageId: string): Promise<CommonResponseModel> {
     //     return this.businessService.deletebusinessData(user, imageId);
     // }
-    //get by id API
+    // get by id API
     @UseGuards(AuthGuard('jwt'))
     @ApiBearerAuth()  
     @Get('/show/:businessId')
