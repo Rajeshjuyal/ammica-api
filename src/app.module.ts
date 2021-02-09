@@ -36,9 +36,10 @@ import { QuestionModule } from './question/question.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { SectionModule } from './section/section.module';
 import { PeriodModule } from './period/period.module';
-import { PayModule } from './pay/pay.module';
+
 import { CatogeryModule } from './catogery/catogery.module';
 import { BusinessModule } from './business/business.module';
+import { SurveyModule } from './survey/survey.module';
 
 @Global()
 @Module({
@@ -88,8 +89,10 @@ import { BusinessModule } from './business/business.module';
     QuestionModule,
     SectionModule,
     PeriodModule,
-    PayModule,
+
     CatogeryModule,
+
+    SurveyModule,
   ],
   controllers: [AppController],
   providers: [AppGateway],
