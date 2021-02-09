@@ -22,7 +22,7 @@ export class BusinessService {
 
     // get bussiness data
     public async getBusinessinfomation(user: UsersDTO,): Promise<CommonResponseModel> {
-        if (user.role !== 'Admin') {
+        if (user.role === 'Parent' || user.role === 'Student') {
             return {response_code: HttpStatus.UNAUTHORIZED, response_data: 'You are not authorized to access this api'};
         }
         const resData = await this.businessModel.findOne({});
