@@ -12,6 +12,17 @@ export interface School {
   user: string;
   _id: string;
   logo: string;
+  imageUrl: {
+    type: String,
+    required: true,
+  },
+  imageId: {
+    type: String,
+    required: true,
+  },
+  filePath:{
+    type: String
+  },
   name: string;
   location: string;
   board: string;
