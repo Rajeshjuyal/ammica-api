@@ -8,7 +8,7 @@ export class ClassService {
   classes: Class[] = [];
   constructor(
     @InjectModel('Class') private readonly classModel: Model<any>,
-    @InjectModel('School') private readonly schoolModel: Model<any>,
+    @InjectModel('Schools') private readonly schoolModel: Model<any>,
   ) {}
   public async create(classes: Class) {
     var class1 = await this.classModel.create(classes);
