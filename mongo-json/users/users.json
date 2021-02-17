@@ -1,0 +1,32 @@
+[
+    {
+        "_id": "5e8f02a81c9d44000078b0f6",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                12.8718,
+                77.6022
+            ]
+        },
+        "status": true,
+        "loyaltyPoints": [],
+        "email": "admin@amica.com",
+        "password": "$2a$10$G9dBlXFJIpdt7e2fJ/mNAuOjoacIqr8NyosLb1E6DR7tCO6/VKRxO",
+        "role": "Admin",
+        "lastName": "Solution",
+        "firstName": "Ashish",
+        "updatedAt": "2020-05-15T15:45:53.306Z",
+        "verificationId": "fc1d4680-7a54-11ea-8e88-e34be729b4bd",
+        "emailVerified": true,
+        "mobileNumber": "9125161262",
+        "exportedFile": {
+            "url": null,
+            "status": "Pending",
+            "publicId": null
+        },
+        "salt": "$2a$10$G9dBlXFJIpdt7e2fJ/mNAu",
+        "otp": 5616,
+        "createdAt": "2020-05-06T18:59:02.223Z",
+        "__v": 0
+    }
+]
