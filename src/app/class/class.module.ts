@@ -8,5 +8,4 @@ import { ClassRoutingModule } from './class-routing.module';
   imports: [CommonModule, ClassRoutingModule],
 })
 export class ClassModule {
-  hj;
 }
