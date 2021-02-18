@@ -37,9 +37,16 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { SectionModule } from './section/section.module';
 import { PeriodModule } from './period/period.module';
 
+
 import { CatogeryModule } from './catogery/catogery.module';
 import { BusinessModule } from './business/business.module';
 import { SurveyModule } from './survey/survey.module';
+import { BusinessModule } from './business/business.module';
+import { PayModule } from './pay/pay.module';
+import { CatogeryModule } from './catogery/catogery.module';
+import { SubmissionModule } from './submission/submission.module';
+import { TcompleteModule } from './tcomplete/tcomplete.module';
+
 
 @Global()
 @Module({
@@ -92,7 +99,11 @@ import { SurveyModule } from './survey/survey.module';
 
     CatogeryModule,
 
+
     SurveyModule,
+
+    SubmissionModule,
+    TcompleteModule,
   ],
   controllers: [AppController],
   providers: [AppGateway],

@@ -12,11 +12,12 @@ export class SchoolService {
   ) {}
 
   public async create(schooldata: School) {
-    var school1 = await this.schoolModel.create(schooldata);
-    console.log(school1);
+    var school = await this.schoolModel.create(schooldata);
+    console.log(school);
     return {
       response_code: HttpStatus.OK,
-      response_data: school1,
+      response_data: school,
+
     };
   }
 
@@ -44,16 +45,19 @@ export class SchoolService {
   }
 
   public async update(id: string, schooldata: School) {
-    var heads = await this.schoolModel.findByIdAndUpdate(id, schooldata);
+    var school = await this.schoolModel.findByIdAndUpdate(id, schooldata);
     return {
       response_code: HttpStatus.OK,
-      response_data:heads,
+      response_data: school,
     };
   }
 
   public async remove(id: string) {
     var schools = await this.schoolModel.findByIdAndDelete(id);
     schools.remove;
-    return schools;
+    return {
+      response_code: HttpStatus.OK,
+      response_data: "School Removed",
+    };
   }
 }
