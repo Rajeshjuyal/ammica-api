@@ -1,3 +1,17 @@
+<<<<<<< HEAD
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+=======
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -144,3 +158,4 @@ bootstrap();
 //     console.log("crone job to set seed db...")
 //     require('../mongo-seeding').seed((process.env.SEED=="true")?true:false);
 // }, null, true)
+>>>>>>> 56be67991db3380928e58df2d16277981970927e
