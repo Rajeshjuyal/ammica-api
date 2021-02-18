@@ -39,6 +39,8 @@ import { PeriodModule } from './period/period.module';
 import { BusinessModule } from './business/business.module';
 import { PayModule } from './pay/pay.module';
 import { CatogeryModule } from './catogery/catogery.module';
+import { SubmissionModule } from './submission/submission.module';
+import { TcompleteModule } from './tcomplete/tcomplete.module';
 
 @Global()
 @Module({
@@ -90,6 +92,8 @@ import { CatogeryModule } from './catogery/catogery.module';
     PeriodModule,
     PayModule,
     CatogeryModule,
+    SubmissionModule,
+    TcompleteModule,
   ],
   controllers: [AppController],
   providers: [AppGateway],
